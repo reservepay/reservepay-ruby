@@ -13,20 +13,50 @@ if ! command -v "$WFN" >/dev/null 2>&1; then
   exit 1
 fi
 
+# Check wfn is new enough to report its version (older builds have no --version)
+if ! WFN_VERSION="$("$WFN" --version 2>/dev/null)" || [ -z "$WFN_VERSION" ]; then
+  echo "Error: '$WFN' is too old - it does not support --version (and --hashfile)." >&2
+  echo "Get/build a newer one from https://github.com/webfunction-protocol/webfunction-cli" >&2
+  exit 1
+fi
+
 mkdir -p lib/reservepay sig/reservepay
 
 # Set the copyright year in the license to the current year
 sed "s/^Copyright (c) [0-9]\{4\}/Copyright (c) $(date +%Y)/" LICENSE.txt > LICENSE.txt.tmp
 mv LICENSE.txt.tmp LICENSE.txt
 
+# Each client's package hash is written here by wfn, then collected into buildinfo.json
+HASH_DIR="$(mktemp -d)"
+trap 'rm -rf "$HASH_DIR"' EXIT
+
 # Generate code for clients (each API is its own Ruby module). Each run writes a .rb file and a
 # .rbs type signature file next to it
-"$WFN" codegen --target ruby --url https://api.reservepay.com/merchants -o ./lib/reservepay/merchant.rb --namespace Reservepay::Merchant
-"$WFN" codegen --target ruby --url https://api.reservepay.com/terminals -o ./lib/reservepay/terminal.rb --namespace Reservepay::Terminal
-"$WFN" codegen --target ruby --url https://api.reservepay.com/sdk -o ./lib/reservepay/sdk.rb --namespace Reservepay::SDK
+"$WFN" codegen --target ruby --url https://api.reservepay.com/merchants -o ./lib/reservepay/merchant.rb --namespace Reservepay::Merchant --hashfile "$HASH_DIR/merchants"
+"$WFN" codegen --target ruby --url https://api.reservepay.com/terminals -o ./lib/reservepay/terminal.rb --namespace Reservepay::Terminal --hashfile "$HASH_DIR/terminals"
+"$WFN" codegen --target ruby --url https://api.reservepay.com/sdk -o ./lib/reservepay/sdk.rb --namespace Reservepay::SDK --hashfile "$HASH_DIR/sdk"
 
 # Move the type signatures to sig/, where RBS and Steep (and the gem) expect them
 mv lib/reservepay/*.rbs sig/reservepay/
+
+# Record what the clients were generated with and from, in buildinfo.json
+MERCHANTS_HASH="$(cat "$HASH_DIR/merchants")"
+TERMINALS_HASH="$(cat "$HASH_DIR/terminals")"
+SDK_HASH="$(cat "$HASH_DIR/sdk")"
+BUILD_TIME="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+cat > buildinfo.json.tmp <<EOF
+{
+  "wfnVersion": "$WFN_VERSION",
+  "packageHashes": {
+    "merchants": "$MERCHANTS_HASH",
+    "terminals": "$TERMINALS_HASH",
+    "sdk": "$SDK_HASH"
+  },
+  "buildTime": "$BUILD_TIME"
+}
+EOF
+mv buildinfo.json.tmp buildinfo.json
 
 # Check the generated clients load (needs Ruby and Bundler)
 if command -v bundle >/dev/null 2>&1; then
