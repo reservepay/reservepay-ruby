@@ -1,0 +1,1491 @@
+# Generated client for the Reservepay Merchant API webfunction package.
+# Source: https://api.reservepay.com/merchants
+#
+# Wraps the real web_function gem (github.com/robinclart/web_function) -
+# every method here calls straight through to the real dynamic client.
+module Reservepay
+  module Merchant
+    class TypedPage[out Item]
+      include Enumerable[Item]
+
+      def initialize: (untyped real_page, Class? item_class) -> void
+      def page: () -> Array[Item]
+      def next?: () -> bool
+      def previous?: () -> bool
+      def next_page: () -> TypedPage[Item]?
+      def previous_page: () -> TypedPage[Item]?
+    end
+
+    class PaymentMethodAttributes
+      def initialize: (untyped raw) -> void
+
+      def name: () -> String
+      def display_name: () -> String
+      def flow: () -> String
+      def category: () -> String
+      def platforms: () -> (Array["WEB" | "IOS" | "ANDROID" | "TERMINAL"])
+    end
+
+    class InstallationAttributes
+      def initialize: (untyped raw) -> void
+
+      def installation_id: () -> String
+      def enabled: () -> bool
+      def name: () -> String
+      def platform: () -> ("WEB" | "IOS" | "ANDROID" | "TERMINAL")
+      def identifier: () -> (String | nil)
+      def payment_methods: () -> Array[PaymentMethodAttributes]
+      def email_capture: () -> ("disabled" | "optional" | "required")
+      def mobile_capture: () -> ("disabled" | "optional" | "required")
+      def address_capture: () -> ("disabled" | "optional" | "required")
+      def created_at: () -> (Integer | Float)
+    end
+
+    class AddPaymentLinkResult
+      def initialize: (untyped raw) -> void
+
+      def payment_link_id: () -> String
+      def batch_id: () -> (String | nil)
+      def payment_link_url: () -> String
+      def status: () -> ("active" | "disabled" | "expired" | "paid")
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def interest_bearer: () -> ("customer" | "merchant" | nil)
+      def description: () -> String
+      def external_id: () -> (String | nil)
+      def expires_at: () -> (Integer | Float | nil)
+      def single_use: () -> bool
+      def capture: () -> bool
+      def send_confirmation_email: () -> bool
+      def installation: () -> InstallationAttributes
+      def created_at: () -> (Integer | Float)
+      def deletable: () -> bool
+    end
+
+    class EntryAttributes
+      def initialize: (untyped raw) -> void
+
+      def entry_id: () -> String
+      def transaction_id: () -> String
+      def direction: () -> ("CREDIT" | "DEBIT")
+      def type: () -> String
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def status: () -> ("ON_HOLD" | "EFFECTIVE" | "CANCELED")
+      def invoice_id: () -> (String | nil)
+      def statement_id: () -> (String | nil)
+      def payout_id: () -> (String | nil)
+      def topup_id: () -> (String | nil)
+      def dispute_id: () -> (String | nil)
+      def parent_id: () -> (String | nil)
+      def parent_type: () -> ("PAYMENT" | nil)
+      def created_at: () -> (Integer | Float)
+      def effective_at: () -> (Integer | Float | nil)
+      def canceled_at: () -> (Integer | Float | nil)
+    end
+
+    class ClonePaymentLinkResult
+      def initialize: (untyped raw) -> void
+
+      def payment_link_id: () -> String
+      def batch_id: () -> (String | nil)
+      def payment_link_url: () -> String
+      def status: () -> ("active" | "disabled" | "expired" | "paid")
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def interest_bearer: () -> ("customer" | "merchant" | nil)
+      def description: () -> String
+      def external_id: () -> (String | nil)
+      def expires_at: () -> (Integer | Float | nil)
+      def single_use: () -> bool
+      def capture: () -> bool
+      def send_confirmation_email: () -> bool
+      def installation: () -> InstallationAttributes
+      def created_at: () -> (Integer | Float)
+      def deletable: () -> bool
+    end
+
+    class BankAccountAttributes
+      def initialize: (untyped raw) -> void
+
+      def bank_account_id: () -> String
+      def bank_code: () -> String
+      def number: () -> String
+      def name: () -> String
+      def country_code: () -> String
+      def created_at: () -> (Integer | Float)
+      def deleted_at: () -> (Integer | Float | nil)
+      def deletable: () -> bool
+      def owner: () -> ("CONTACT" | "MERCHANT")
+      def primary: () -> bool
+    end
+
+    class CardAttributes
+      def initialize: (untyped raw) -> void
+
+      def card_id: () -> String
+      def token: () -> String
+      def usage: () -> ("SINGLE" | "MULTIPLE")
+      def used: () -> bool
+      def first_digits: () -> String
+      def last_digits: () -> String
+      def length: () -> (Integer | Float)
+      def expiration_date: () -> String
+      def cardholder_name: () -> String
+      def scheme: () -> String
+      def created_at: () -> (Integer | Float)
+      def deleted_at: () -> (Integer | Float | nil)
+      def deletable: () -> bool
+    end
+
+    class ContactAttributes
+      def initialize: (untyped raw) -> void
+
+      def contact_id: () -> String
+      def external_id: () -> (String | nil)
+      def email: () -> (String | nil)
+      def mobile: () -> (String | nil)
+      def name: () -> (String | nil)
+      def favorite: () -> bool
+      def created_at: () -> (Integer | Float)
+      def primary_bank_account: () -> (BankAccountAttributes | nil)
+      def default_card: () -> (CardAttributes | nil)
+      def bank_accounts: () -> Array[BankAccountAttributes]
+      def cards: () -> Array[CardAttributes]
+    end
+
+    class PaymentLinkAttributes
+      def initialize: (untyped raw) -> void
+
+      def payment_link_id: () -> String
+      def batch_id: () -> (String | nil)
+      def payment_link_url: () -> String
+      def status: () -> ("active" | "disabled" | "expired" | "paid")
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def interest_bearer: () -> ("customer" | "merchant" | nil)
+      def description: () -> String
+      def external_id: () -> (String | nil)
+      def expires_at: () -> (Integer | Float | nil)
+      def single_use: () -> bool
+      def capture: () -> bool
+      def send_confirmation_email: () -> bool
+      def installation: () -> InstallationAttributes
+      def created_at: () -> (Integer | Float)
+      def deletable: () -> bool
+    end
+
+    class FeeAttributes
+      def initialize: (untyped raw) -> void
+
+      def fee_id: () -> String
+      def kind: () -> ("bank_account_validation" | "communication" | "dispute" | "installment" | "metadata" | "payment" | "payout" | "plan" | "refund" | "virtual_account")
+      def parent_id: () -> String
+      def billing_code: () -> String
+      def unit_amount: () -> (Integer | Float)
+      def percentage_amount: () -> (Integer | Float)
+      def discount_applied: () -> (true | false)
+      def statement_id: () -> String
+    end
+
+    class PaymentAttributes
+      def initialize: (untyped raw) -> void
+
+      def payment_id: () -> String
+      def external_id: () -> (String | nil)
+      def status: () -> ("PENDING" | "AUTHORIZED" | "SUCCESSFUL" | "FAILED" | "REVERSED" | "VOIDED" | "CANCELLED" | "EXPIRED" | "REFUNDED" | "PARTIALLY_REFUNDED" | "DISPUTED")
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def payment_method: () -> String
+      def payment_method_category: () -> String
+      def payment_method_display_name: () -> String
+      def card_first_digits: () -> (String | nil)
+      def card_last_digits: () -> (String | nil)
+      def card_masked_number: () -> (String | nil)
+      def card_network: () -> (String | nil)
+      def cardholder_name: () -> (String | nil)
+      def card_expiration_date: () -> (String | nil)
+      def created_at: () -> (Integer | Float)
+      def authorized_at: () -> (Integer | Float | nil)
+      def captured_at: () -> (Integer | Float | nil)
+      def voided_at: () -> (Integer | Float | nil)
+      def cancelled_at: () -> (Integer | Float | nil)
+      def refundable_at: () -> (Integer | Float | nil)
+      def expires_at: () -> (Integer | Float | nil)
+      def capture: () -> ("AUTOMATIC" | "MANUAL")
+      def customer_id: () -> (String | nil)
+      def customer_external_id: () -> (String | nil)
+      def customer_email: () -> (String | nil)
+      def customer_mobile: () -> (String | nil)
+      def customer_name: () -> (String | nil)
+      def fees: () -> Array[FeeAttributes]
+      def ref1: () -> (String | nil)
+      def ref2: () -> (String | nil)
+      def ref3: () -> (String | nil)
+      def reversible: () -> bool
+      def capturable: () -> bool
+      def voidable: () -> bool
+      def cancellable: () -> bool
+      def refundable: () -> bool
+      def fraud_finding: () -> ("risky" | "safe" | nil)
+      def failure_code: () -> (String | nil)
+      def failure_message: () -> (String | nil)
+      def terminal_id: () -> (String | nil)
+      def payment_link_id: () -> (String | nil)
+      def payment_session_id: () -> (String | nil)
+      def checkout_id: () -> (String | nil)
+      def installment_term: () -> (Integer | Float | nil)
+      def interest_bearer: () -> ("customer" | "merchant" | nil)
+      def installment_interest_rate: () -> (String | nil)
+      def installment_interest_amount: () -> (Integer | Float | nil)
+      def installment_bank_name: () -> (String | nil)
+      def installment_bank_display_name: () -> (String | nil)
+    end
+
+    class PayoutAttributes
+      def initialize: (untyped raw) -> void
+
+      def payout_id: () -> String
+      def external_id: () -> (String | nil)
+      def status: () -> ("SUCCESSFUL" | "SENT" | "PENDING" | "FAILED" | "CANCELLED" | "REQUESTED")
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def created_at: () -> (Integer | Float)
+      def paid_at: () -> (Integer | Float | nil)
+      def sent_at: () -> (Integer | Float | nil)
+      def bank_account_id: () -> (String | nil)
+      def bank_code: () -> (String | nil)
+      def bank_account_number: () -> (String | nil)
+      def bank_account_name: () -> (String | nil)
+      def bank_country_code: () -> (String | nil)
+      def payout_method: () -> (String | nil)
+      def mobile_number: () -> (String | nil)
+      def national_id: () -> (String | nil)
+      def fees: () -> Array[FeeAttributes]
+      def ref1: () -> (String | nil)
+      def needs_authorization: () -> (true | false)
+      def requested_by_user_id: () -> (String | nil)
+      def requested_by_user_email: () -> (String | nil)
+      def authorized_by_user_id: () -> (String | nil)
+      def authorized_by_user_email: () -> (String | nil)
+      def rejected_by_user_id: () -> (String | nil)
+      def rejected_by_user_email: () -> (String | nil)
+    end
+
+    class TerminalAttributes
+      def initialize: (untyped raw) -> void
+
+      def terminal_id: () -> String
+      def connected: () -> (true | false)
+      def external_id: () -> (String | nil)
+      def installation_id: () -> (String | nil)
+      def name: () -> String
+      def branch_name: () -> (String | nil)
+      def enabled: () -> (true | false)
+      def kiosk_mode: () -> (true | false)
+      def last_verified_at: () -> (Integer | Float | nil)
+      def connected_at: () -> (Integer | Float | nil)
+      def delegated_terminal_id: () -> (String | nil)
+      def parent_terminal_id: () -> (String | nil)
+      def challenge: () -> String
+    end
+
+    class TopupAttributes
+      def initialize: (untyped raw) -> void
+
+      def topup_id: () -> String
+      def status: () -> ("PENDING" | "SUCCESSFUL")
+      def type: () -> ("MANUAL" | "VIRTUAL_ACCOUNT")
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def transaction_id: () -> (String | nil)
+      def sender_account_name: () -> (String | nil)
+      def sender_account_number: () -> (String | nil)
+      def sender_bank_code: () -> (String | nil)
+      def virtual_account_number: () -> (String | nil)
+      def created_at: () -> (Integer | Float)
+    end
+
+    class FindBankAccountResult
+      def initialize: (untyped raw) -> void
+
+      def bank_account_id: () -> String
+      def bank_code: () -> String
+      def number: () -> String
+      def name: () -> String
+      def country_code: () -> String
+      def created_at: () -> (Integer | Float)
+      def deleted_at: () -> (Integer | Float | nil)
+      def deletable: () -> bool
+      def owner: () -> ("CONTACT" | "MERCHANT")
+      def primary: () -> bool
+    end
+
+    class FindBatchResult
+      def initialize: (untyped raw) -> void
+
+      def batch_id: () -> String
+      def type: () -> ("PAYMENT_LINK" | "PAYOUT")
+      def status: () -> ("CREATED" | "PREPARING" | "PREPARED" | "PROCESSING" | "COMPLETED")
+      def output_url: () -> (String | nil)
+      def preview_url: () -> (String | nil)
+      def error_message: () -> (String | nil)
+      def created_at: () -> (Integer | Float)
+    end
+
+    class FindCardResult
+      def initialize: (untyped raw) -> void
+
+      def card_id: () -> String
+      def token: () -> String
+      def usage: () -> ("SINGLE" | "MULTIPLE")
+      def used: () -> bool
+      def first_digits: () -> String
+      def last_digits: () -> String
+      def length: () -> (Integer | Float)
+      def expiration_date: () -> String
+      def cardholder_name: () -> String
+      def scheme: () -> String
+      def created_at: () -> (Integer | Float)
+      def deleted_at: () -> (Integer | Float | nil)
+      def deletable: () -> bool
+    end
+
+    class FindCommunicationDeliveryResult
+      def initialize: (untyped raw) -> void
+
+      def communication_delivery_id: () -> String
+      def communication_channel_id: () -> String
+      def payment_link_id: () -> String
+      def delivery: () -> ("email" | "sms")
+      def recipient: () -> String
+      def contact_id: () -> (String | nil)
+      def status: () -> ("queued" | "processing" | "accepted" | "failed")
+      def created_at: () -> (Integer | Float)
+      def accepted_at: () -> (Integer | Float | nil)
+    end
+
+    class DisputeEvidenceAttributes
+      def initialize: (untyped raw) -> void
+
+      def evidence_id: () -> String
+      def stage: () -> ("CHALLENGE" | "ESCALATION")
+      def comment: () -> (String | nil)
+      def filename: () -> (String | nil)
+      def content_type: () -> (String | nil)
+      def byte_size: () -> (Integer | Float | nil)
+      def submitted: () -> (true | false)
+      def upload_url: () -> (String | nil)
+      def download_url: () -> (String | nil)
+      def created_at: () -> (Integer | Float)
+    end
+
+    class FindDisputeResult
+      def initialize: (untyped raw) -> void
+
+      def dispute_id: () -> String
+      def payment_id: () -> String
+      def contact_id: () -> (String | nil)
+      def message: () -> (String | nil)
+      def status: () -> ("OPEN" | "CHALLENGED" | "REOPENED" | "ESCALATED" | "WON" | "LOST" | "EXPIRED")
+      def challenge_received_at: () -> (Integer | Float | nil)
+      def escalation_received_at: () -> (Integer | Float | nil)
+      def won_at: () -> (Integer | Float | nil)
+      def lost_at: () -> (Integer | Float | nil)
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def reason: () -> String
+      def suggested_evidence: () -> (Array["cancellation_policy" | "cancellation_request_records" | "common_evidence" | "customer_communication" | "device_id_ip_data" | "marketing_materials" | "payment_logs" | "payment_processing_records" | "receipt" | "refund_issuance" | "refund_policy" | "refund_records" | "return_policy" | "shipping_documentation" | "supplier_certification" | "technical_support_logs" | "transaction_history" | "transaction_logs"])
+      def deadline_at: () -> (Integer | Float | nil)
+      def created_at: () -> (Integer | Float)
+      def fees: () -> Array[FeeAttributes]
+      def conceded: () -> (true | false)
+      def evidences: () -> Array[DisputeEvidenceAttributes]
+    end
+
+    class FindInstallationResult
+      def initialize: (untyped raw) -> void
+
+      def installation_id: () -> String
+      def enabled: () -> bool
+      def name: () -> String
+      def platform: () -> ("WEB" | "IOS" | "ANDROID" | "TERMINAL")
+      def identifier: () -> (String | nil)
+      def payment_methods: () -> Array[PaymentMethodAttributes]
+      def email_capture: () -> ("disabled" | "optional" | "required")
+      def mobile_capture: () -> ("disabled" | "optional" | "required")
+      def address_capture: () -> ("disabled" | "optional" | "required")
+      def created_at: () -> (Integer | Float)
+    end
+
+    class FindInvoiceResult
+      def initialize: (untyped raw) -> void
+
+      def invoice_id: () -> String
+      def number: () -> String
+      def status: () -> ("due" | "settled")
+      def amount: () -> (Integer | Float)
+      def net_amount: () -> (Integer | Float)
+      def vat_amount: () -> (Integer | Float)
+      def currency: () -> String
+      def issued_on: () -> String
+      def pdf_download_url: () -> (String | nil)
+      def receipt_id: () -> (String | nil)
+      def receipt_number: () -> (String | nil)
+      def receipt_pdf_download_url: () -> (String | nil)
+      def receipt_xml_download_url: () -> (String | nil)
+      def receipt_created_at: () -> (Integer | Float | nil)
+      def created_at: () -> (Integer | Float)
+    end
+
+    class FindKeyResult
+      def initialize: (untyped raw) -> void
+
+      def key_id: () -> String
+      def key: () -> String
+      def name: () -> String
+      def revoked: () -> bool
+      def created_at: () -> (Integer | Float)
+      def permissions: () -> (Array["authorize_payout" | "manage_contacts" | "manage_developer_settings" | "manage_disputes" | "manage_payouts" | "manage_plan" | "manage_settings" | "manage_team" | "manage_terminals" | "manage_transactions" | "view_contacts" | "view_disputes" | "view_payouts" | "view_plan" | "view_settings" | "view_statements" | "view_team" | "view_transactions"])
+    end
+
+    class FindPaymentResult
+      def initialize: (untyped raw) -> void
+
+      def payment_id: () -> String
+      def external_id: () -> (String | nil)
+      def status: () -> ("PENDING" | "AUTHORIZED" | "SUCCESSFUL" | "FAILED" | "REVERSED" | "VOIDED" | "CANCELLED" | "EXPIRED" | "REFUNDED" | "PARTIALLY_REFUNDED" | "DISPUTED")
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def payment_method: () -> String
+      def payment_method_category: () -> String
+      def payment_method_display_name: () -> String
+      def card_first_digits: () -> (String | nil)
+      def card_last_digits: () -> (String | nil)
+      def card_masked_number: () -> (String | nil)
+      def card_network: () -> (String | nil)
+      def cardholder_name: () -> (String | nil)
+      def card_expiration_date: () -> (String | nil)
+      def created_at: () -> (Integer | Float)
+      def authorized_at: () -> (Integer | Float | nil)
+      def captured_at: () -> (Integer | Float | nil)
+      def voided_at: () -> (Integer | Float | nil)
+      def cancelled_at: () -> (Integer | Float | nil)
+      def refundable_at: () -> (Integer | Float | nil)
+      def expires_at: () -> (Integer | Float | nil)
+      def capture: () -> ("AUTOMATIC" | "MANUAL")
+      def customer_id: () -> (String | nil)
+      def customer_external_id: () -> (String | nil)
+      def customer_email: () -> (String | nil)
+      def customer_mobile: () -> (String | nil)
+      def customer_name: () -> (String | nil)
+      def fees: () -> Array[FeeAttributes]
+      def ref1: () -> (String | nil)
+      def ref2: () -> (String | nil)
+      def ref3: () -> (String | nil)
+      def reversible: () -> bool
+      def capturable: () -> bool
+      def voidable: () -> bool
+      def cancellable: () -> bool
+      def refundable: () -> bool
+      def fraud_finding: () -> ("risky" | "safe" | nil)
+      def failure_code: () -> (String | nil)
+      def failure_message: () -> (String | nil)
+      def terminal_id: () -> (String | nil)
+      def payment_link_id: () -> (String | nil)
+      def payment_session_id: () -> (String | nil)
+      def checkout_id: () -> (String | nil)
+      def installment_term: () -> (Integer | Float | nil)
+      def interest_bearer: () -> ("customer" | "merchant" | nil)
+      def installment_interest_rate: () -> (String | nil)
+      def installment_interest_amount: () -> (Integer | Float | nil)
+      def installment_bank_name: () -> (String | nil)
+      def installment_bank_display_name: () -> (String | nil)
+    end
+
+    class FindPaymentLinkResult
+      def initialize: (untyped raw) -> void
+
+      def payment_link_id: () -> String
+      def batch_id: () -> (String | nil)
+      def payment_link_url: () -> String
+      def status: () -> ("active" | "disabled" | "expired" | "paid")
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def interest_bearer: () -> ("customer" | "merchant" | nil)
+      def description: () -> String
+      def external_id: () -> (String | nil)
+      def expires_at: () -> (Integer | Float | nil)
+      def single_use: () -> bool
+      def capture: () -> bool
+      def send_confirmation_email: () -> bool
+      def installation: () -> InstallationAttributes
+      def created_at: () -> (Integer | Float)
+      def deletable: () -> bool
+    end
+
+    class FindPayoutResult
+      def initialize: (untyped raw) -> void
+
+      def payout_id: () -> String
+      def external_id: () -> (String | nil)
+      def status: () -> ("SUCCESSFUL" | "SENT" | "PENDING" | "FAILED" | "CANCELLED" | "REQUESTED")
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def created_at: () -> (Integer | Float)
+      def paid_at: () -> (Integer | Float | nil)
+      def sent_at: () -> (Integer | Float | nil)
+      def bank_account_id: () -> (String | nil)
+      def bank_code: () -> (String | nil)
+      def bank_account_number: () -> (String | nil)
+      def bank_account_name: () -> (String | nil)
+      def bank_country_code: () -> (String | nil)
+      def payout_method: () -> (String | nil)
+      def mobile_number: () -> (String | nil)
+      def national_id: () -> (String | nil)
+      def fees: () -> Array[FeeAttributes]
+      def ref1: () -> (String | nil)
+      def needs_authorization: () -> (true | false)
+      def requested_by_user_id: () -> (String | nil)
+      def requested_by_user_email: () -> (String | nil)
+      def authorized_by_user_id: () -> (String | nil)
+      def authorized_by_user_email: () -> (String | nil)
+      def rejected_by_user_id: () -> (String | nil)
+      def rejected_by_user_email: () -> (String | nil)
+    end
+
+    class FindRefundResult
+      def initialize: (untyped raw) -> void
+
+      def refund_id: () -> String
+      def external_id: () -> (String | nil)
+      def payment_id: () -> String
+      def status: () -> String
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def created_at: () -> (Integer | Float)
+      def refunded_at: () -> (Integer | Float | nil)
+      def full: () -> (true | false)
+    end
+
+    class FindTerminalResult
+      def initialize: (untyped raw) -> void
+
+      def terminal_id: () -> String
+      def connected: () -> (true | false)
+      def external_id: () -> (String | nil)
+      def installation_id: () -> (String | nil)
+      def name: () -> String
+      def branch_name: () -> (String | nil)
+      def enabled: () -> (true | false)
+      def kiosk_mode: () -> (true | false)
+      def last_verified_at: () -> (Integer | Float | nil)
+      def connected_at: () -> (Integer | Float | nil)
+      def delegated_terminal_id: () -> (String | nil)
+      def parent_terminal_id: () -> (String | nil)
+      def challenge: () -> String
+    end
+
+    class FindTopupResult
+      def initialize: (untyped raw) -> void
+
+      def topup_id: () -> String
+      def status: () -> ("PENDING" | "SUCCESSFUL")
+      def type: () -> ("MANUAL" | "VIRTUAL_ACCOUNT")
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def transaction_id: () -> (String | nil)
+      def sender_account_name: () -> (String | nil)
+      def sender_account_number: () -> (String | nil)
+      def sender_bank_code: () -> (String | nil)
+      def virtual_account_number: () -> (String | nil)
+      def created_at: () -> (Integer | Float)
+    end
+
+    class FindVirtualAccountResult
+      def initialize: (untyped raw) -> void
+
+      def virtual_account_id: () -> String
+      def state: () -> ("pending" | "opening" | "active" | "closing" | "failed" | "closed")
+      def number: () -> (String | nil)
+      def bank_name: () -> String
+      def display_name: () -> String
+      def currency: () -> String
+      def created_at: () -> (Integer | Float)
+    end
+
+    class FindWebhookResult
+      def initialize: (untyped raw) -> void
+
+      def webhook_id: () -> String
+      def name: () -> String
+      def enabled: () -> bool
+      def api_version: () -> String
+      def destination_url: () -> String
+      def protocol: () -> ("HTTP" | "HTTPS")
+      def signature_type: () -> ("SHA256" | "HMAC_SHA256" | "ED25519")
+      def verification_key: () -> String
+      def events: () -> (Array["PAYMENT_COMPLETED" | "PAYMENT_VOIDED" | "PAYMENT_REVERSED" | "PAYMENT_CANCELLED" | "PAYMENT_AUTHORIZED" | "PAYMENT_EXPIRED" | "PAYOUT_COMPLETED" | "TOPUP_SETTLED"])
+      def created_at: () -> (Integer | Float)
+    end
+
+    class GenerateBrandingUploadUrlResult
+      def initialize: (untyped raw) -> void
+
+      def url: () -> String
+      def upload_id: () -> String
+      def headers: () -> Hash[String, untyped]
+    end
+
+    class GenerateDisputeEvidenceUploadUrlResult
+      def initialize: (untyped raw) -> void
+
+      def url: () -> String
+      def upload_id: () -> String
+      def headers: () -> Hash[String, untyped]
+    end
+
+    class GenerateOnboardingUploadUrlResult
+      def initialize: (untyped raw) -> void
+
+      def url: () -> String
+      def upload_id: () -> String
+      def headers: () -> Hash[String, untyped]
+    end
+
+    class GenerateTemporaryTerminalChallengeResult
+      def initialize: (untyped raw) -> void
+
+      def temporary_challenge: () -> String
+      def expires_at: () -> (Integer | Float)
+    end
+
+    class GetBalanceResult
+      def initialize: (untyped raw) -> void
+
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+    end
+
+    class ActivityLogAttributes
+      def initialize: (untyped raw) -> void
+
+      def created_at: () -> (Integer | Float)
+      def activity_type: () -> ("COMMUNICATION_CHANNEL_ACTIVATED" | "DISPUTE_CHALLENGED" | "DISPUTE_CONCEDED" | "DISPUTE_ESCALATED" | "INVITATION_ACCEPTED" | "PAYMENT_CANCELLED" | "PAYMENT_CAPTURED" | "PAYMENT_REVERSED" | "PAYMENT_VOIDED" | "PAYOUT_AUTHORIZED" | "PAYOUT_CREATED" | "PAYOUT_REJECTED" | "PAYOUT_REQUESTED" | "PLAN_SWITCHED" | "REFUND_CREATED" | "USER_INVITED" | "USER_REMOVED")
+      def actor_type: () -> ("USER" | "API_KEY" | "SYSTEM")
+      def actor_email: () -> (String | nil)
+      def actor_key_id: () -> (String | nil)
+      def parent_type: () -> ("PAYMENT" | nil)
+      def parent_id: () -> (String | nil)
+      def field_object_id: () -> (String | nil)
+      def object_type: () -> ("PAYMENT" | "REFUND" | "DISPUTE" | "PAYOUT" | nil)
+      def user_email: () -> (String | nil)
+      def new_plan_id: () -> (String | nil)
+      def new_plan_name: () -> (String | nil)
+      def previous_plan_id: () -> (String | nil)
+      def previous_plan_name: () -> (String | nil)
+    end
+
+    class ApiRequestLogAttributes
+      def initialize: (untyped raw) -> void
+
+      def created_at: () -> (Integer | Float)
+      def status: () -> (Integer | Float)
+      def endpoint: () -> String
+      def ip_address: () -> (String | nil)
+      def source: () -> ("API" | "DASHBOARD")
+      def user_email: () -> (String | nil)
+      def user_agent: () -> (String | nil)
+    end
+
+    class BatchAttributes
+      def initialize: (untyped raw) -> void
+
+      def batch_id: () -> String
+      def type: () -> ("PAYMENT_LINK" | "PAYOUT")
+      def status: () -> ("CREATED" | "PREPARING" | "PREPARED" | "PROCESSING" | "COMPLETED")
+      def output_url: () -> (String | nil)
+      def preview_url: () -> (String | nil)
+      def error_message: () -> (String | nil)
+      def created_at: () -> (Integer | Float)
+    end
+
+    class CommunicationChannelAttributes
+      def initialize: (untyped raw) -> void
+
+      def communication_channel_id: () -> String
+      def delivery: () -> ("email" | "sms")
+      def email: () -> (String | nil)
+      def sender_name: () -> (String | nil)
+      def active: () -> (true | false)
+      def status: () -> ("active" | "pending_setup" | "inactive")
+    end
+
+    class DisputeAttributes
+      def initialize: (untyped raw) -> void
+
+      def dispute_id: () -> String
+      def payment_id: () -> String
+      def contact_id: () -> (String | nil)
+      def message: () -> (String | nil)
+      def status: () -> ("OPEN" | "CHALLENGED" | "REOPENED" | "ESCALATED" | "WON" | "LOST" | "EXPIRED")
+      def challenge_received_at: () -> (Integer | Float | nil)
+      def escalation_received_at: () -> (Integer | Float | nil)
+      def won_at: () -> (Integer | Float | nil)
+      def lost_at: () -> (Integer | Float | nil)
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def reason: () -> String
+      def suggested_evidence: () -> (Array["cancellation_policy" | "cancellation_request_records" | "common_evidence" | "customer_communication" | "device_id_ip_data" | "marketing_materials" | "payment_logs" | "payment_processing_records" | "receipt" | "refund_issuance" | "refund_policy" | "refund_records" | "return_policy" | "shipping_documentation" | "supplier_certification" | "technical_support_logs" | "transaction_history" | "transaction_logs"])
+      def deadline_at: () -> (Integer | Float | nil)
+      def created_at: () -> (Integer | Float)
+      def fees: () -> Array[FeeAttributes]
+      def conceded: () -> (true | false)
+      def evidences: () -> Array[DisputeEvidenceAttributes]
+    end
+
+    class NotificationTopicAttributes
+      def initialize: (untyped raw) -> void
+
+      def id: () -> String
+      def name: () -> ("api_key" | "billing" | "dispute" | "fraud" | "incident" | "installation_key" | "payout" | "plan" | "planned_maintenance" | "team" | "webhook")
+      def display_name: () -> String
+      def category: () -> ("api_key" | "billing" | "dispute" | "fraud" | "incident" | "installation_key" | "payout" | "plan" | "planned_maintenance" | "team" | "webhook" | nil)
+    end
+
+    class EmailRecipientAttributes
+      def initialize: (untyped raw) -> void
+
+      def email: () -> String
+      def language: () -> ("en" | "th")
+      def notification_topics: () -> Array[NotificationTopicAttributes]
+    end
+
+    class ListInstallmentIssuersResult
+      def initialize: (untyped raw) -> void
+
+      def issuer_id: () -> String
+      def display_name: () -> String
+    end
+
+    class InvoiceAttributes
+      def initialize: (untyped raw) -> void
+
+      def invoice_id: () -> String
+      def number: () -> String
+      def status: () -> ("due" | "settled")
+      def amount: () -> (Integer | Float)
+      def net_amount: () -> (Integer | Float)
+      def vat_amount: () -> (Integer | Float)
+      def currency: () -> String
+      def issued_on: () -> String
+      def pdf_download_url: () -> (String | nil)
+      def receipt_id: () -> (String | nil)
+      def receipt_number: () -> (String | nil)
+      def receipt_pdf_download_url: () -> (String | nil)
+      def receipt_xml_download_url: () -> (String | nil)
+      def receipt_created_at: () -> (Integer | Float | nil)
+      def created_at: () -> (Integer | Float)
+    end
+
+    class KeyAttributes
+      def initialize: (untyped raw) -> void
+
+      def key_id: () -> String
+      def key: () -> String
+      def name: () -> String
+      def revoked: () -> bool
+      def created_at: () -> (Integer | Float)
+      def permissions: () -> (Array["authorize_payout" | "manage_contacts" | "manage_developer_settings" | "manage_disputes" | "manage_payouts" | "manage_plan" | "manage_settings" | "manage_team" | "manage_terminals" | "manage_transactions" | "view_contacts" | "view_disputes" | "view_payouts" | "view_plan" | "view_settings" | "view_statements" | "view_team" | "view_transactions"])
+    end
+
+    class MetadataAttributes
+      def initialize: (untyped raw) -> void
+
+      def key: () -> String
+      def metadata: () -> (untyped | nil)
+      def bytesize: () -> (Integer | Float)
+      def version: () -> (Integer | Float)
+      def updated_at: () -> (Integer | Float)
+      def created_at: () -> (Integer | Float)
+      def expires_at: () -> (Integer | Float | nil)
+    end
+
+    class MonthlyBillingArchiveAttributes
+      def initialize: (untyped raw) -> void
+
+      def id: () -> String
+      def url: () -> String
+    end
+
+    class EventDeliveryAttributes
+      def initialize: (untyped raw) -> void
+
+      def event_id: () -> String
+      def event_delivery_id: () -> String
+      def status_code: () -> (Integer | Float)
+      def failure_code: () -> (String | nil)
+      def url: () -> (String | nil)
+      def occurrences: () -> (Integer | Float)
+      def created_at: () -> (Integer | Float)
+      def payload: () -> Hash[String, untyped]
+    end
+
+    class PaymentActivityAttributes
+      def initialize: (untyped raw) -> void
+
+      def created_at: () -> (Integer | Float)
+      def activity: () -> ("dispute_lost" | "dispute_opened" | "dispute_reopened" | "dispute_won" | "payment_authorized" | "payment_cancelled" | "payment_checked_out" | "payment_completed" | "payment_created" | "payment_redirect_url_accessed" | "payment_reversed" | "payment_selected" | "payment_voided" | "refund_completed" | "refund_created" | "refund_failed" | "refund_initiated")
+      def path: () -> (String | nil)
+      def ip_address: () -> (String | nil)
+      def severity: () -> ("INFO" | "WARN" | "ERROR")
+      def request: () -> (Hash[String, untyped] | nil)
+      def response: () -> (untyped | nil)
+      def event_deliveries: () -> (Array[EventDeliveryAttributes] | nil)
+      def payment_status: () -> (String | nil)
+    end
+
+    class ListPayoutActivitiesResult
+      def initialize: (untyped raw) -> void
+
+      def created_at: () -> (Integer | Float)
+      def activity: () -> ("payout_authorized" | "payout_completed" | "payout_created" | "payout_rejected" | "payout_requested")
+      def path: () -> (String | nil)
+      def ip_address: () -> (String | nil)
+      def severity: () -> ("INFO" | "WARN" | "ERROR")
+      def request: () -> (Hash[String, untyped] | nil)
+      def response: () -> (untyped | nil)
+      def event_deliveries: () -> (Array[EventDeliveryAttributes] | nil)
+      def payout_status: () -> (String | nil)
+    end
+
+    class PlannedMaintenanceAttributes
+      def initialize: (untyped raw) -> void
+
+      def id: () -> String
+      def service_name: () -> String
+      def affected_services: () -> (Array["api" | "vault" | "relay" | "wallet" | "merchant-dashboard" | "website" | "developer"])
+      def status: () -> ("pending" | "in_progress" | "completed")
+      def start_at: () -> (Integer | Float)
+      def end_at: () -> (Integer | Float)
+      def expected_impact: () -> ("no_impact" | "intermittent_service" | "temporary_unavailable")
+      def expected_impact_description: () -> String
+      def purpose: () -> String
+      def action_required: () -> ("no_action" | "pause_transactions")
+    end
+
+    class PlanSkuAttributes
+      def initialize: (untyped raw) -> void
+
+      def code: () -> String
+      def category: () -> ("DISPUTE" | "INSTALLMENT" | "PLAN" | "PAYOUT" | "REFUND" | "METADATA" | "VIRTUAL_ACCOUNT" | "BANK_ACCOUNT_VALIDATION" | "COMMUNICATION" | "PAYMENT")
+      def unit_price: () -> (Integer | Float | nil)
+      def percentage_fee: () -> (Integer | Float | nil)
+      def fee_calculation_method: () -> ("SUM" | "HIGHER_OF" | "LOWER_OF")
+      def discount_unit_price: () -> (Integer | Float | nil)
+      def discount_percentage_fee: () -> (Integer | Float | nil)
+      def discount_minimum_billable_amount: () -> (Integer | Float | nil)
+      def discount_maximum_billable_amount: () -> (Integer | Float | nil)
+      def discount_maximum_monthly_uses: () -> (Integer | Float | nil)
+      def discount_shared_monthly_uses: () -> (true | false)
+    end
+
+    class PlanAttributes
+      def initialize: (untyped raw) -> void
+
+      def id: () -> (String | nil)
+      def tier_code: () -> ("pay_as_you_go" | "startup" | "professional" | "enterprise")
+      def tier_name: () -> String
+      def features: () -> Array[String]
+      def revision_time: () -> (Integer | Float)
+      def selectable: () -> bool
+      def rank: () -> (Integer | Float)
+      def skus: () -> Array[PlanSkuAttributes]
+    end
+
+    class RefundAttributes
+      def initialize: (untyped raw) -> void
+
+      def refund_id: () -> String
+      def external_id: () -> (String | nil)
+      def payment_id: () -> String
+      def status: () -> String
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def created_at: () -> (Integer | Float)
+      def refunded_at: () -> (Integer | Float | nil)
+      def full: () -> (true | false)
+    end
+
+    class RoleAttributes
+      def initialize: (untyped raw) -> void
+
+      def id: () -> String
+      def name: () -> String
+      def description: () -> String
+      def custom: () -> (true | false)
+      def permissions: () -> (Array["authorize_payout" | "view_team" | "view_settings" | "view_contacts" | "view_transactions" | "view_statements" | "view_payouts" | "view_plan" | "view_disputes" | "manage_team" | "manage_settings" | "manage_contacts" | "manage_transactions" | "manage_payouts" | "manage_plan" | "manage_developer_settings" | "manage_terminals" | "manage_disputes"])
+    end
+
+    class StatementAttributes
+      def initialize: (untyped raw) -> void
+
+      def date: () -> String
+      def payment_amount: () -> (Integer | Float)
+      def payment_count: () -> (Integer | Float)
+      def refund_amount: () -> (Integer | Float)
+      def refund_count: () -> (Integer | Float)
+      def dispute_amount: () -> (Integer | Float | nil)
+      def dispute_count: () -> (Integer | Float | nil)
+      def payout_amount: () -> (Integer | Float)
+      def payout_count: () -> (Integer | Float)
+      def fees: () -> (Integer | Float)
+      def net_transaction_volume: () -> (Integer | Float)
+      def invoice_amount: () -> (Integer | Float)
+      def invoice_status: () -> ("unbilled" | "due" | "settled")
+      def invoice_pdf_download_url: () -> (String | nil)
+      def invoice_id: () -> (String | nil)
+      def change_in_balance: () -> (Integer | Float)
+      def csv_download_url: () -> (String | nil)
+      def pdf_download_url: () -> (String | nil)
+    end
+
+    class InvitationAttributes
+      def initialize: (untyped raw) -> void
+
+      def invitation_id: () -> String
+      def email: () -> String
+      def role_id: () -> String
+      def inviter_id: () -> String
+    end
+
+    class MerchantMembershipAttributes
+      def initialize: (untyped raw) -> void
+
+      def user_id: () -> String
+      def name: () -> String
+      def email: () -> String
+      def email_confirmed: () -> (true | false)
+      def mfa_enabled: () -> (true | false)
+      def role_id: () -> String
+      def preferred_language: () -> String
+    end
+
+    class VirtualAccountAttributes
+      def initialize: (untyped raw) -> void
+
+      def virtual_account_id: () -> String
+      def state: () -> ("pending" | "opening" | "active" | "closing" | "failed" | "closed")
+      def number: () -> (String | nil)
+      def bank_name: () -> String
+      def display_name: () -> String
+      def currency: () -> String
+      def created_at: () -> (Integer | Float)
+    end
+
+    class WebhookAttributes
+      def initialize: (untyped raw) -> void
+
+      def webhook_id: () -> String
+      def name: () -> String
+      def enabled: () -> bool
+      def api_version: () -> String
+      def destination_url: () -> String
+      def protocol: () -> ("HTTP" | "HTTPS")
+      def signature_type: () -> ("SHA256" | "HMAC_SHA256" | "ED25519")
+      def verification_key: () -> String
+      def events: () -> (Array["PAYMENT_COMPLETED" | "PAYMENT_VOIDED" | "PAYMENT_REVERSED" | "PAYMENT_CANCELLED" | "PAYMENT_AUTHORIZED" | "PAYMENT_EXPIRED" | "PAYOUT_COMPLETED" | "TOPUP_SETTLED"])
+      def created_at: () -> (Integer | Float)
+    end
+
+    class RetrieveBrandingResult
+      def initialize: (untyped raw) -> void
+
+      def primary_color: () -> String
+      def secondary_color: () -> String
+      def sidebar_color: () -> String
+      def sidebar_background_type: () -> ("color" | "image")
+      def tile_sidebar_image: () -> bool
+      def hide_logo: () -> bool
+      def shop_name_font_family: () -> String
+      def shop_name_font_variant: () -> ("Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black")
+      def heading_font_family: () -> String
+      def heading_font_variant: () -> ("Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black")
+      def body_font_family: () -> String
+      def body_font_variant: () -> ("Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black")
+      def use_iso_code: () -> bool
+      def hide_non_significant_zeros: () -> bool
+      def show_amount_in_button: () -> bool
+      def symbol_placement: () -> ("use_default" | "before_amount" | "after_amount")
+      def default_button_text: () -> String
+      def button_shape: () -> ("rounded_none" | "rounded_full" | "rounded_xs" | "rounded_sm" | "rounded_md" | "rounded_lg" | "rounded_xl")
+      def light_logo_url: () -> (String | nil)
+      def light_logo_id: () -> (String | nil)
+      def light_logo_filename: () -> (String | nil)
+      def light_logo_file_type: () -> (String | nil)
+      def dark_logo_url: () -> (String | nil)
+      def dark_logo_id: () -> (String | nil)
+      def dark_logo_filename: () -> (String | nil)
+      def dark_logo_file_type: () -> (String | nil)
+      def sidebar_image_url: () -> (String | nil)
+      def sidebar_image_id: () -> (String | nil)
+      def sidebar_image_filename: () -> (String | nil)
+      def sidebar_image_file_type: () -> (String | nil)
+    end
+
+    class RetrieveBrandingFontResult
+      def initialize: (untyped raw) -> void
+
+      def family: () -> String
+      def category: () -> ("sans-serif" | "serif" | "monospace" | "display" | "handwriting")
+      def variants: () -> (Array["Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black"])
+    end
+
+    class RetrieveCheckoutResult
+      def initialize: (untyped raw) -> void
+
+      def checkout_id: () -> String
+      def amount: () -> String
+      def currency: () -> String
+      def interest_bearer: () -> ("customer" | "merchant" | nil)
+      def installation_id: () -> String
+      def customer_id: () -> (String | nil)
+      def customer_email: () -> (String | nil)
+      def customer_mobile: () -> (String | nil)
+      def customer_name: () -> (String | nil)
+      def external_id: () -> (String | nil)
+      def redirect_url: () -> String
+      def payment_id: () -> (String | nil)
+    end
+
+    class MerchantConfigurationAttributes
+      def initialize: (untyped raw) -> void
+
+      def funding_currency: () -> "THB"
+      def time_zone: () -> String
+      def time_offset: () -> String
+      def minimum_automated_payout_amount: () -> (Integer | Float)
+      def maximum_automated_payout_amount: () -> (Integer | Float)
+      def high_value_payout_threshold_amount: () -> (Integer | Float)
+      def payouts_blocked: () -> (true | false)
+    end
+
+    class RetrieveContactResult
+      def initialize: (untyped raw) -> void
+
+      def contact_id: () -> String
+      def external_id: () -> (String | nil)
+      def email: () -> (String | nil)
+      def mobile: () -> (String | nil)
+      def name: () -> (String | nil)
+      def favorite: () -> bool
+      def created_at: () -> (Integer | Float)
+      def primary_bank_account: () -> (BankAccountAttributes | nil)
+      def default_card: () -> (CardAttributes | nil)
+      def bank_accounts: () -> Array[BankAccountAttributes]
+      def cards: () -> Array[CardAttributes]
+    end
+
+    class CurrentPlanAttributes
+      def initialize: (untyped raw) -> void
+
+      def id: () -> (String | nil)
+      def tier_code: () -> ("pay_as_you_go" | "startup" | "professional" | "enterprise")
+      def tier_name: () -> String
+      def features: () -> Array[String]
+      def revision_time: () -> (Integer | Float)
+      def selectable: () -> bool
+      def rank: () -> (Integer | Float)
+      def skus: () -> Array[PlanSkuAttributes]
+      def pending_plan_id: () -> (String | nil)
+    end
+
+    class RetrieveDisputePerformanceResult
+      def initialize: (untyped raw) -> void
+
+      def start_date: () -> String
+      def end_date: () -> String
+      def amount: () -> (Integer | Float)
+      def count: () -> (Integer | Float)
+      def average: () -> (Integer | Float | nil)
+      def change: () -> (Integer | Float | nil)
+      def granularity: () -> ("hourly" | "daily" | "weekly" | "monthly")
+      def transactions: () -> Array[Hash[String, untyped]]
+    end
+
+    class RetrieveMerchantSettingsResult
+      def initialize: (untyped raw) -> void
+
+      def preferred_communication_language: () -> ("en" | "th")
+      def payout_contact_authorization_required: () -> (true | false)
+      def payout_allow_self_authorization: () -> (true | false)
+      def payout_skip_authorization_for_api_key: () -> (true | false)
+    end
+
+    class RetrieveMonthlyBillingArchiveResult
+      def initialize: (untyped raw) -> void
+
+      def id: () -> String
+      def url: () -> String
+    end
+
+    class KeyPersonAttributes
+      def initialize: (untyped raw) -> void
+
+      def key_person_id: () -> String
+      def full_name: () -> String
+      def first_name: () -> String
+      def middle_name: () -> (String | nil)
+      def last_name: () -> String
+      def first_name_local_language: () -> (String | nil)
+      def middle_name_local_language: () -> (String | nil)
+      def last_name_local_language: () -> (String | nil)
+      def date_of_birth: () -> String
+      def nationality: () -> (String | nil)
+      def type: () -> ("UBO" | "AUTHORIZED_SIGNATORY")
+      def percentage_of_ownership: () -> (Integer | Float | nil)
+      def authorized_director: () -> (bool | nil)
+      def national_id: () -> (String | nil)
+      def national_id_expiry_date: () -> (String | nil)
+      def national_id_without_expiry_date: () -> (true | false)
+      def passport_number: () -> (String | nil)
+      def passport_expiry_date: () -> (String | nil)
+      def address_street_1: () -> (String | nil)
+      def address_street_2: () -> (String | nil)
+      def postal_code: () -> (String | nil)
+      def city: () -> (String | nil)
+      def primary_administrative_division: () -> (String | nil)
+      def country: () -> (String | nil)
+      def current_address_street_1: () -> (String | nil)
+      def current_address_street_2: () -> (String | nil)
+      def current_address_postal_code: () -> (String | nil)
+      def current_address_city: () -> (String | nil)
+      def current_address_primary_administrative_division: () -> (String | nil)
+      def current_address_country: () -> (String | nil)
+      def use_residence_registration_as_current_address: () -> (true | false)
+    end
+
+    class UploadAttributes
+      def initialize: (untyped raw) -> void
+
+      def upload_id: () -> String
+      def filename: () -> String
+      def file_size: () -> (Integer | Float)
+      def file_type: () -> String
+      def url: () -> String
+    end
+
+    class RequiredDocumentAttributes
+      def initialize: (untyped raw) -> void
+
+      def label: () -> String
+      def allow_multiple: () -> bool
+      def uploaded_documents: () -> Array[UploadAttributes]
+    end
+
+    class SalesChannelAttributes
+      def initialize: (untyped raw) -> void
+
+      def sales_channel_id: () -> String
+      def platform: () -> ("WEB" | "IOS" | "ANDROID" | "TERMINAL")
+      def url: () -> String
+      def demo_url: () -> (String | nil)
+      def instructions: () -> (String | nil)
+    end
+
+    class OnboardingAttributes
+      def initialize: (untyped raw) -> void
+
+      def onboarding_id: () -> String
+      def test_merchant_id: () -> String
+      def live_merchant_id: () -> (String | nil)
+      def status: () -> ("DRAFT" | "PENDING" | "APPROVED" | "REJECTED")
+      def readiness: () -> Hash[String, untyped]
+      def entity_type: () -> ("UNKNOWN" | "BUSINESS" | "INDIVIDUAL")
+      def merchant_display_name: () -> String
+      def legal_name: () -> (String | nil)
+      def category_code: () -> String
+      def product_types: () -> (Array["DIGITAL_GOODS" | "PHYSICAL_GOODS" | "SERVICES"])
+      def business: () -> (Hash[String, untyped] | nil)
+      def individual: () -> (Hash[String, untyped] | nil)
+      def key_people: () -> Array[KeyPersonAttributes]
+      def primary_bank_account: () -> (Hash[String, untyped] | nil)
+      def auto_payout_frequency: () -> ("NEVER" | "DAILY" | "WEEKLY")
+      def expected_monthly_transaction_amount: () -> (Integer | Float)
+      def expected_maximum_transaction_amount: () -> (Integer | Float)
+      def required_documents: () -> Array[RequiredDocumentAttributes]
+      def sales_channels: () -> Array[SalesChannelAttributes]
+      def preferred_communication_language: () -> ("en" | "th")
+      def requested_changes_reason: () -> (String | nil)
+      def rejection_reason: () -> (String | nil)
+    end
+
+    class RetrievePrimaryBankAccountResult
+      def initialize: (untyped raw) -> void
+
+      def bank_account_id: () -> String
+      def bank_code: () -> String
+      def number: () -> String
+      def name: () -> String
+      def country_code: () -> String
+      def created_at: () -> (Integer | Float)
+      def deleted_at: () -> (Integer | Float | nil)
+      def deletable: () -> bool
+      def owner: () -> ("CONTACT" | "MERCHANT")
+      def primary: () -> bool
+    end
+
+    class RetrieveRefundPerformanceResult
+      def initialize: (untyped raw) -> void
+
+      def start_date: () -> String
+      def end_date: () -> String
+      def amount: () -> (Integer | Float)
+      def count: () -> (Integer | Float)
+      def average: () -> (Integer | Float | nil)
+      def change: () -> (Integer | Float | nil)
+      def granularity: () -> ("hourly" | "daily" | "weekly" | "monthly")
+      def transactions: () -> Array[Hash[String, untyped]]
+    end
+
+    class RetrieveSalesPerformanceResult
+      def initialize: (untyped raw) -> void
+
+      def start_date: () -> String
+      def end_date: () -> String
+      def amount: () -> (Integer | Float)
+      def count: () -> (Integer | Float)
+      def average: () -> (Integer | Float | nil)
+      def change: () -> (Integer | Float | nil)
+      def granularity: () -> ("hourly" | "daily" | "weekly" | "monthly")
+      def transactions: () -> Array[Hash[String, untyped]]
+    end
+
+    class SendPaymentLinkResult
+      def initialize: (untyped raw) -> void
+
+      def communication_delivery_id: () -> String
+      def communication_channel_id: () -> String
+      def payment_link_id: () -> String
+      def delivery: () -> ("email" | "sms")
+      def recipient: () -> String
+      def contact_id: () -> (String | nil)
+      def status: () -> ("queued" | "processing" | "accepted" | "failed")
+      def created_at: () -> (Integer | Float)
+      def accepted_at: () -> (Integer | Float | nil)
+    end
+
+    class StartCheckoutResult
+      def initialize: (untyped raw) -> void
+
+      def checkout_id: () -> String
+      def amount: () -> String
+      def currency: () -> String
+      def interest_bearer: () -> ("customer" | "merchant" | nil)
+      def installation_id: () -> String
+      def customer_id: () -> (String | nil)
+      def customer_email: () -> (String | nil)
+      def customer_mobile: () -> (String | nil)
+      def customer_name: () -> (String | nil)
+      def external_id: () -> (String | nil)
+      def redirect_url: () -> String
+      def payment_id: () -> (String | nil)
+    end
+
+    class SupportedPaymentMethodsResult
+      def initialize: (untyped raw) -> void
+
+      def name: () -> String
+      def display_name: () -> String
+      def flow: () -> String
+      def category: () -> String
+      def platforms: () -> (Array["WEB" | "IOS" | "ANDROID" | "TERMINAL"])
+    end
+
+    class ValidateBankAccountResult
+      def initialize: (untyped raw) -> void
+
+      def available: () -> bool
+      def match: () -> bool
+      def score: () -> (Integer | Float)
+      def similarity: () -> (Integer | Float)
+      def distance: () -> (Integer | Float | nil)
+      def normalized_name: () -> (String | nil)
+    end
+
+    Undefined: untyped
+
+    class Client
+      SOURCE_URL: String
+
+      def initialize: (?untyped real_client, ?bearer_auth: String?, ?version: String?, ?pipelined: bool) -> void
+      def self.from_package_endpoint: (String url, ?bearer_auth: String?, ?version: String?, ?pipelined: bool) -> Client
+
+      def abort_payment_on_terminal: (terminal_id: String) -> bool
+      def add_contact: (?external_id: String, ?contact_email: String, ?contact_mobile: String, ?contact_name: String, ?favorite: bool) -> String
+      def add_key_person: (first_name: String, ?middle_name: String, last_name: String, ?first_name_local_language: String, ?middle_name_local_language: String, ?last_name_local_language: String, date_of_birth: String, nationality: String, type: "UBO" | "AUTHORIZED_SIGNATORY", ?percentage_of_ownership: Integer | Float, ?authorized_director: bool, ?national_id: String, ?national_id_expiry_date: String, ?national_id_without_expiry_date: bool, ?passport_number: String, ?passport_expiry_date: String, ?address_street_1: String, ?address_street_2: String, ?postal_code: String, ?city: String, ?primary_administrative_division: String, ?country: String, ?current_address_street_1: String, ?current_address_street_2: String, ?current_address_postal_code: String, ?current_address_city: String, ?current_address_primary_administrative_division: String, ?current_address_country: String, ?use_residence_registration_as_current_address: bool) -> String
+      def add_payment_link: (amount: Integer | Float, currency: String, ?interest_bearer: "customer" | "merchant", description: String, ?external_id: String, ?expires_at: Integer | Float, ?single_use: true | false, ?capture: true | false, ?send_confirmation_email: true | false, ?installation_name: String, ?installation_payment_methods: String, ?installation_email_capture: "disabled" | "optional" | "required", ?installation_mobile_capture: "disabled" | "optional" | "required", ?installation_address_capture: "disabled" | "optional" | "required") -> AddPaymentLinkResult
+      def add_sales_channel: (platform: "WEB" | "IOS" | "ANDROID" | "TERMINAL", ?url: String, ?demo_url: String, ?instructions: String) -> String
+      def add_terminal: (name: String, ?external_id: String, ?installation_id: String, ?branch_name: String, ?kiosk_mode: bool, ?delegated_terminal_id: String) -> String
+      def add_to_metadata_set: (key: String, ?path: String, value: untyped, ?version: Integer | Float, ?ttl: Integer | Float) -> bool
+      def add_topup: (amount: String, ?virtual_account_number: String, ?transaction_id: String, ?sender_account_name: String, ?sender_account_number: String, ?sender_bank_code: String) -> String
+      def assign_role: (user_id: String, ?role_id: String) -> bool
+      def available_api_versions: () -> Array[String]
+      def balance_history: (?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[EntryAttributes]
+      def cancel_payment: (payment_id: String) -> bool
+      def capture_payment: (payment_id: String) -> bool
+      def challenge_dispute: (dispute_id: String) -> bool
+      def clone_payment_link: (payment_link_id: String, ?external_id: String) -> ClonePaymentLinkResult
+      def concede_dispute: (dispute_id: String) -> bool
+      def confirm_branding_upload: (upload_id: String) -> bool
+      def confirm_dispute_evidence_upload: (dispute_id: String, upload_id: String) -> bool
+      def confirm_onboarding_upload: (upload_id: String) -> bool
+      def disable_installation: (installation_id: String) -> bool
+      def disable_payment_link: (payment_link_id: String) -> bool
+      def disable_terminal: (terminal_id: String) -> bool
+      def disconnect_webhook: (webhook_id: String) -> bool
+      def enable_installation: (installation_id: String) -> bool
+      def enable_payment_link: (payment_link_id: String) -> bool
+      def enable_terminal: (terminal_id: String) -> bool
+      def escalate_dispute: (dispute_id: String) -> bool
+      def filter_contacts: (?per_page: Integer | Float, ?page: Integer | Float, ?name: String, ?email: String, ?mobile: String, ?terms: String, ?created_at: String) -> TypedPage[ContactAttributes]
+      def filter_payment_links: (?per_page: Integer | Float, ?page: Integer | Float, ?terms: String, ?status: "ACTIVE" | "DISABLED" | "EXPIRED" | "PAID", ?usage: "SINGLE" | "MULTIPLE", ?batch_id: String, ?amount: String, ?created_at: String, ?expires_at: String) -> TypedPage[PaymentLinkAttributes]
+      def filter_payments: (?per_page: Integer | Float, ?page: Integer | Float, ?status: "PENDING" | "SUCCESSFUL" | "AUTHORIZED" | "VOIDED" | "REVERSED" | "CANCELLED" | "FAILED" | "EXPIRED" | "DISPUTED" | "REFUNDED", ?created_at: String, ?authorized_at: String, ?captured_at: String, ?payment_method: String, ?payment_method_category: String, ?issuer_id: String, ?currency: String, ?amount: String, ?contact_id: String, ?terminal_id: String, ?terms: String, ?fraud_finding: "" | "safe" | "risky") -> TypedPage[PaymentAttributes]
+      def filter_payouts: (?per_page: Integer | Float, ?page: Integer | Float, ?status: "SUCCESSFUL" | "SENT" | "PENDING" | "FAILED" | "CANCELLED" | "REQUESTED", ?created_at: String, ?paid_at: String, ?sent_at: String, ?payout_method: String, ?currency: String, ?amount: String, ?bank_code: String, ?contact_id: String, ?terms: String) -> TypedPage[PayoutAttributes]
+      def filter_terminals: (?per_page: Integer | Float, ?page: Integer | Float, ?name: String, ?branch_name: String, ?terms: String, ?created_at: String, ?connected_at: String) -> TypedPage[TerminalAttributes]
+      def filter_topups: (?per_page: Integer | Float, ?page: Integer | Float, ?type: "MANUAL" | "VIRTUAL_ACCOUNT", ?virtual_account_number: String, ?amount: String, ?created_at: String, ?terms: String) -> TypedPage[TopupAttributes]
+      def find_bank_account: (bank_account_id: String) -> FindBankAccountResult
+      def find_batch: (batch_id: String) -> FindBatchResult
+      def find_card: (?card_id: String, ?token: String) -> FindCardResult
+      def find_communication_delivery: (communication_delivery_id: String) -> FindCommunicationDeliveryResult
+      def find_dispute: (dispute_id: String) -> FindDisputeResult
+      def find_installation: (installation_id: String) -> FindInstallationResult
+      def find_invoice: (invoice_id: String) -> FindInvoiceResult
+      def find_key: (key_id: String) -> FindKeyResult
+      def find_payment: (payment_id: String) -> FindPaymentResult
+      def find_payment_link: (payment_link_id: String) -> FindPaymentLinkResult
+      def find_payout: (payout_id: String) -> FindPayoutResult
+      def find_refund: (refund_id: String) -> FindRefundResult
+      def find_terminal: (terminal_id: String) -> FindTerminalResult
+      def find_topup: (topup_id: String) -> FindTopupResult
+      def find_virtual_account: (virtual_account_id: String) -> FindVirtualAccountResult
+      def find_webhook: (webhook_id: String) -> FindWebhookResult
+      def forget_card: (contact_id: String, card_id: String) -> bool
+      def generate_branding_upload_url: (filename: String, type: "light_logo" | "dark_logo" | "sidebar_image", md5_hash: String, byte_size: Integer | Float) -> GenerateBrandingUploadUrlResult
+      def generate_dispute_evidence_upload_url: (dispute_id: String, filename: String, md5_hash: String, byte_size: Integer | Float, ?comment: String) -> GenerateDisputeEvidenceUploadUrlResult
+      def generate_onboarding_upload_url: (filename: String, type: String, md5_hash: String, byte_size: Integer | Float) -> GenerateOnboardingUploadUrlResult
+      def generate_temporary_terminal_challenge: (terminal_id: String) -> GenerateTemporaryTerminalChallengeResult
+      def get_balance: () -> GetBalanceResult
+      def initiate_payment_flow: (?external_id: String, amount: String, currency: String, payment_session_id: String, ?card_id: String, capture: bool, return_url: String, ?customer_id: String, ?customer_email: String, ?customer_mobile: String, ?customer_name: String, ?save_card: String, ?interest_bearer: "customer" | "merchant") -> String
+      def link_bank_account: (contact_id: String, bank_code: String, number: String, name: String, country_code: String, ?primary: bool, ?external_id: String) -> String
+      def list_activity_logs: (?per_page: Integer | Float, ?after: String, ?before: String, ?activity_type: "communication_channel_activated" | "dispute" | "dispute_challenged" | "dispute_conceded" | "dispute_escalated" | "invitation_accepted" | "payment_cancelled" | "payment_captured" | "payment_reversed" | "payment_voided" | "payout" | "payout_authorized" | "payout_created" | "payout_rejected" | "payout_requested" | "plan_switched" | "refund_created" | "user_invited" | "user_removed", ?actor_email: String, ?actor_key_id: String, ?object_id: String, ?parent_id: String, ?created_at: String, ?terms: String) -> TypedPage[ActivityLogAttributes]
+      def list_api_request_logs: (?per_page: Integer | Float, ?after: String, ?before: String, ?status: 200 | 400 | 500, ?source: "API" | "DASHBOARD", ?endpoint: String, ?user_email: String, ?ip_address: String, ?created_at: String, ?terms: String) -> TypedPage[ApiRequestLogAttributes]
+      def list_batches: (?type: "PAYMENT_LINK" | "PAYOUT", ?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[BatchAttributes]
+      def list_communication_channels: () -> Array[CommunicationChannelAttributes]
+      def list_contacts: (?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[ContactAttributes]
+      def list_disputes: (?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[DisputeAttributes]
+      def list_disputes_by_payment: (payment_id: String, ?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[DisputeAttributes]
+      def list_email_subscribers: () -> Array[EmailRecipientAttributes]
+      def list_installations: () -> Array[InstallationAttributes]
+      def list_installment_issuers: () -> Array[ListInstallmentIssuersResult]
+      def list_invoices: (?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[InvoiceAttributes]
+      def list_keys: () -> Array[KeyAttributes]
+      def list_metadata: (?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[MetadataAttributes]
+      def list_monthly_billing_archives: (?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[MonthlyBillingArchiveAttributes]
+      def list_payment_activities: (payment_id: String) -> Array[PaymentActivityAttributes]
+      def list_payment_link_payments: (payment_link_id: String, ?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[PaymentAttributes]
+      def list_payment_links: (?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[PaymentLinkAttributes]
+      def list_payments: (?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[PaymentAttributes]
+      def list_payments_by_contact: (contact_id: String, ?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[PaymentAttributes]
+      def list_payments_by_terminal: (terminal_id: String, ?created_at: String, ?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[PaymentAttributes]
+      def list_payout_activities: (payout_id: String) -> Array[ListPayoutActivitiesResult]
+      def list_payouts: (?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[PayoutAttributes]
+      def list_payouts_by_contact: (contact_id: String, ?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[PayoutAttributes]
+      def list_permissions: () -> Array[String]
+      def list_planned_maintenances: (?language: "en" | "th") -> Array[PlannedMaintenanceAttributes]
+      def list_plans: () -> Array[PlanAttributes]
+      def list_refunds_by_payment: (payment_id: String, ?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[RefundAttributes]
+      def list_roles: () -> Array[RoleAttributes]
+      def list_statements: (?month: String) -> TypedPage[StatementAttributes]
+      def list_terminals: (?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[TerminalAttributes]
+      def list_topups: (?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[TopupAttributes]
+      def list_user_invitations: () -> Array[InvitationAttributes]
+      def list_users: () -> Array[MerchantMembershipAttributes]
+      def list_virtual_accounts: (?per_page: Integer | Float, ?after: String, ?before: String) -> TypedPage[VirtualAccountAttributes]
+      def list_webhooks: () -> Array[WebhookAttributes]
+      def pause_webhook: (webhook_id: String) -> bool
+      def reconfigure_installation: (installation_id: String, name: String, payment_methods: String, ?email_capture: "disabled" | "optional" | "required", ?mobile_capture: "disabled" | "optional" | "required", ?address_capture: "disabled" | "optional" | "required") -> bool
+      def reconnect_webhook: (webhook_id: String, name: String, protocol: "HTTP" | "HTTPS", ?signature_type: "SHA256" | "HMAC_SHA256" | "ED25519", api_version: String, destination_url: String, events: Array["PAYMENT_COMPLETED" | "PAYMENT_VOIDED" | "PAYMENT_REVERSED" | "PAYMENT_CANCELLED" | "PAYMENT_AUTHORIZED" | "PAYMENT_EXPIRED" | "PAYOUT_COMPLETED" | "TOPUP_SETTLED"]) -> bool
+      def refund_payment: (payment_id: String, ?amount: Integer | Float, ?external_id: String) -> String
+      def remove_branding_document: (upload_id: String) -> bool
+      def remove_contact: (contact_id: String) -> bool
+      def remove_from_metadata_set: (key: String, ?path: String, value: untyped, ?version: Integer | Float) -> bool
+      def remove_in_metadata: (key: String, path: String, ?version: Integer | Float) -> bool
+      def remove_installation: (installation_id: String) -> bool
+      def remove_key_person: (key_person_id: String) -> bool
+      def remove_onboarding_document: (upload_id: String) -> bool
+      def remove_payment_link: (payment_link_id: String) -> bool
+      def remove_sales_channel: (sales_channel_id: String) -> bool
+      def remove_terminal: (terminal_id: String) -> bool
+      def request_payment: (?card_id: String, ?token: String, amount: String, currency: String, installation_id: String, capture: bool, ?external_id: String, ?customer_id: String, ?customer_email: String, ?customer_mobile: String, ?customer_name: String, ?save_card: String) -> String
+      def reset_terminal: (terminal_id: String) -> bool
+      def resume_payment_on_terminal: (terminal_id: String, payment_id: String) -> bool
+      def resume_webhook: (webhook_id: String) -> bool
+      def retrieve_branding: () -> RetrieveBrandingResult
+      def retrieve_branding_font: () -> Array[RetrieveBrandingFontResult]
+      def retrieve_checkout: (checkout_id: String) -> RetrieveCheckoutResult
+      def retrieve_configuration: () -> MerchantConfigurationAttributes
+      def retrieve_contact: (contact_id: String) -> RetrieveContactResult
+      def retrieve_current_plan: () -> CurrentPlanAttributes
+      def retrieve_dispute_performance: (period: String, ?include_won: bool, ?include_lost: bool, ?include_in_progress: bool) -> RetrieveDisputePerformanceResult
+      def retrieve_email_subscriber: (email: String) -> EmailRecipientAttributes
+      def retrieve_merchant_settings: () -> RetrieveMerchantSettingsResult
+      def retrieve_metadata: (key: String, ?path: String, ?data_only: bool) -> (MetadataAttributes | untyped)
+      def retrieve_monthly_billing_archive: (monthly_billing_archive_id: String) -> RetrieveMonthlyBillingArchiveResult
+      def retrieve_notification_topics: () -> Array[NotificationTopicAttributes]
+      def retrieve_onboarding_details: () -> OnboardingAttributes
+      def retrieve_primary_bank_account: () -> RetrievePrimaryBankAccountResult
+      def retrieve_refund_performance: (period: String, ?exclude_voided: bool) -> RetrieveRefundPerformanceResult
+      def retrieve_sales_performance: (period: String, ?exclude_voided: bool, ?terminal_id: String) -> RetrieveSalesPerformanceResult
+      def reverse_payment: (payment_id: String) -> bool
+      def revoke_key: (key_id: String) -> bool
+      def save_card: (?external_id: String, token: String, contact_id: String, ?contact_email: String, ?contact_mobile: String, ?contact_name: String, ?default: bool) -> String
+      def select_plan: (plan_id: String) -> bool
+      def send_payment_link: (payment_link_id: String, communication_channel_id: String, recipient: String) -> SendPaymentLinkResult
+      def send_payout: (?external_id: String, amount: String) -> String
+      def send_payout_to_contact: (?recipient_id: String, ?payout_method: String, ?bank_account_id: String, ?bank_account_number: String, ?bank_account_name: String, ?bank_code: String, ?country_code: String, ?mobile_number: String, ?national_id: String, ?external_id: String, amount: String, ?recipient_mobile: String, ?recipient_name: String, ?recipient_email: String, ?update_contact: true | false, ?send_confirmation_email: true | false) -> String
+      def set_default_card: (contact_id: String, card_id: String) -> bool
+      def set_entity_type: (entity_type: "BUSINESS" | "INDIVIDUAL") -> bool
+      def set_merchant_classification: (category_code: String, product_types: Array["DIGITAL_GOODS" | "PHYSICAL_GOODS" | "SERVICES"], ?expected_monthly_transaction_amount: Integer | Float, ?expected_maximum_transaction_amount: Integer | Float) -> bool
+      def set_primary_bank_account: (bank_code: String, number: String, name: String, country_code: String) -> String
+      def set_primary_contact_bank_account: (contact_id: String, bank_account_id: String) -> bool
+      def start_checkout: (installation_id: String, amount: String, currency: String, ?interest_bearer: "customer" | "merchant", return_url: String, ?external_id: String, ?customer_id: String, ?customer_email: String, ?customer_mobile: String, ?customer_name: String) -> StartCheckoutResult
+      def start_payment_on_terminal: (?external_id: String, terminal_id: String, amount: Integer | Float, currency: String, payment_method: String, ?capture: bool) -> bool
+      def subscribe_to_topics: (email: String, language: "en" | "th", notification_topic_ids: Array[untyped]) -> bool
+      def supported_payment_methods: () -> Array[SupportedPaymentMethodsResult]
+      def sync_metadata: (key: String, ?path: String, metadata: untyped, ?version: Integer | Float, ?ttl: Integer | Float) -> String
+      def turn_off_auto_payout: () -> bool
+      def turn_on_auto_payout: (frequency: "DAILY" | "WEEKLY") -> bool
+      def unlink_bank_account: (contact_id: String, bank_account_id: String) -> bool
+      def unsubscribe_from_all_topics: (email: String) -> bool
+      def update_bank_account: (contact_id: String, bank_account_id: String, ?name: String, ?primary: bool, ?external_id: String) -> bool
+      def update_branding: (?primary_color: String, ?secondary_color: String, ?sidebar_color: String, ?sidebar_background_type: "color" | "image", ?tile_sidebar_image: bool, ?hide_logo: bool, ?shop_name_font_family: String, ?shop_name_font_variant: "Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black", ?heading_font_family: String, ?heading_font_variant: "Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black", ?body_font_family: String, ?body_font_variant: "Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black", ?use_iso_code: bool, ?hide_non_significant_zeros: bool, ?show_amount_in_button: bool, ?symbol_placement: "use_default" | "before_amount" | "after_amount", ?default_button_text: String, ?button_shape: "rounded_none" | "rounded_full" | "rounded_xs" | "rounded_sm" | "rounded_md" | "rounded_lg" | "rounded_xl") -> bool
+      def update_business_details: (?partial_update: bool, legal_name: String, registration_number: String, ?registration_date: String, address_street_1: String, ?address_street_2: String, postal_code: String, city: String, country: String, primary_administrative_division: String, ?operation_address_street_1: String, ?operation_address_street_2: String, ?operation_address_postal_code: String, ?operation_address_city: String, ?operation_address_country: String, ?operation_address_primary_administrative_division: String, ?use_business_registration_as_operation_address: bool, branch: String, legal_structure: "PRIVATE_LIMITED_COMPANY" | "PUBLIC_LIMITED_COMPANY" | "LIMITED_PARTNERSHIP" | "REGISTERED_ORDINARY_PARTNERSHIP" | "ORDINARY_PARTNERSHIP" | "GOVERNMENT_AGENCY" | "FOUNDATION" | "ASSOCIATION" | "COOPERATIVE" | "CHAMBER_OF_COMMERCE" | "SCHOOL_OR_UNIVERSITY" | "PLACE_OF_WORSHIP" | "FOREIGN_COMPANY", kym_contact_person: String, kym_contact_phone: String) -> bool
+      def update_contact: (contact_id: String, ?contact_email: String, ?contact_mobile: String, ?contact_name: String, ?favorite: bool) -> bool
+      def update_individual_details: (?partial_update: bool, first_name: String, ?middle_name: String, last_name: String, ?first_name_local_language: String, ?middle_name_local_language: String, ?last_name_local_language: String, nationality: String, national_id: String, national_id_expiry_date: String, ?national_id_without_expiry_date: bool, ?thai_national_id_laser_code: String, phone: String, date_of_birth: String, address_street_1: String, ?address_street_2: String, postal_code: String, city: String, country: String, primary_administrative_division: String, ?operation_address_street_1: String, ?operation_address_street_2: String, ?operation_address_postal_code: String, ?operation_address_city: String, ?operation_address_country: String, ?operation_address_primary_administrative_division: String, ?current_address_street_1: String, ?current_address_street_2: String, ?current_address_postal_code: String, ?current_address_city: String, ?current_address_country: String, ?current_address_primary_administrative_division: String, ?use_residence_registration_as_current_address: bool, ?use_residence_registration_as_operation_address: bool) -> bool
+      def update_key: (key_id: String, name: String) -> bool
+      def update_key_person: (key_person_id: String, first_name: String, ?middle_name: String, last_name: String, ?first_name_local_language: String, ?middle_name_local_language: String, ?last_name_local_language: String, date_of_birth: String, nationality: String, type: "UBO" | "AUTHORIZED_SIGNATORY", ?percentage_of_ownership: Integer | Float, ?authorized_director: bool, ?national_id: String, ?national_id_expiry_date: String, ?national_id_without_expiry_date: bool, ?passport_number: String, ?passport_expiry_date: String, ?address_street_1: String, ?address_street_2: String, ?postal_code: String, ?city: String, ?primary_administrative_division: String, ?country: String, ?current_address_street_1: String, ?current_address_street_2: String, ?current_address_postal_code: String, ?current_address_city: String, ?current_address_primary_administrative_division: String, ?current_address_country: String, ?use_residence_registration_as_current_address: bool) -> bool
+      def update_merchant_settings: (?preferred_communication_language: "en" | "th", ?payout_contact_authorization_required: bool, ?payout_allow_self_authorization: bool, ?payout_skip_authorization_for_api_key: bool) -> bool
+      def update_sales_channel: (sales_channel_id: String, ?url: String, ?demo_url: String, ?instructions: String) -> bool
+      def update_terminal: (terminal_id: String, ?name: String, ?external_id: String, ?installation_id: String, ?branch_name: String, ?kiosk_mode: bool, ?delegated_terminal_id: String) -> String
+      def validate_bank_account: (bank_code: String, account_number: String, ?name: String, ?local_name: String, sensitivity: Integer | Float) -> ValidateBankAccountResult
+      def void_payment: (payment_id: String) -> bool
+
+      def call: (String endpoint_name, ?Hash[Symbol, untyped] args) -> untyped
+      def package: () -> untyped
+      def bearer_auth=: (String?) -> void
+      def version=: (String?) -> void
+      def pipeline=: (untyped) -> void
+    end
+  end
+end

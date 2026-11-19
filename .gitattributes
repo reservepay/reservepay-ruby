@@ -1,0 +1,18 @@
+* text=auto
+*.sh text eol=lf
+
+* export-ignore
+/README.md -export-ignore
+/LICENSE.txt -export-ignore
+/reservepay.gemspec -export-ignore
+/lib -export-ignore
+/lib/** -export-ignore
+/sig -export-ignore
+/sig/** -export-ignore
+
+/lib/reservepay/merchant.rb linguist-generated
+/lib/reservepay/sdk.rb linguist-generated
+/lib/reservepay/terminal.rb linguist-generated
+/sig/reservepay/merchant.rbs linguist-generated
+/sig/reservepay/sdk.rbs linguist-generated
+/sig/reservepay/terminal.rbs linguist-generated

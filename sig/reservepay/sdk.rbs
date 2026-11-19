@@ -1,0 +1,151 @@
+# Generated client for the Reservepay SDK API webfunction package.
+# Source: https://api.reservepay.com/sdk
+#
+# Wraps the real web_function gem (github.com/robinclart/web_function) -
+# every method here calls straight through to the real dynamic client.
+module Reservepay
+  module SDK
+    class InstallmentPlanAttributes
+      def initialize: (untyped raw) -> void
+
+      def installment_plan_id: () -> String
+      def name: () -> String
+      def months: () -> (Integer | Float)
+      def interest_rate: () -> String
+      def interest_bearer: () -> ("customer" | "merchant")
+      def monthly_amount: () -> (Integer | Float)
+      def total_amount: () -> (Integer | Float)
+      def monthly_interest_amount: () -> (Integer | Float)
+      def total_interest_amount: () -> (Integer | Float)
+      def currency: () -> String
+      def bank_name: () -> String
+      def bank_display_name: () -> String
+    end
+
+    class RetrieveCheckoutResult
+      def initialize: (untyped raw) -> void
+
+      def return_url: () -> (String | nil)
+    end
+
+    class BankAttributes
+      def initialize: (untyped raw) -> void
+
+      def name: () -> String
+      def display_name: () -> String
+    end
+
+    class PaymentMethodAttributes
+      def initialize: (untyped raw) -> void
+
+      def name: () -> String
+      def display_name: () -> String
+      def flow: () -> String
+      def category: () -> String
+      def requires_address: () -> bool
+      def required_fields: () -> Array[String]
+      def banks: () -> Array[BankAttributes]
+    end
+
+    class RetrieveInstallationSettingsResult
+      def initialize: (untyped raw) -> void
+
+      def installation_id: () -> String
+      def name: () -> String
+      def platform: () -> ("WEB" | "IOS" | "ANDROID" | "TERMINAL")
+      def identifier: () -> String
+      def payment_methods: () -> Array[PaymentMethodAttributes]
+      def email_capture: () -> ("disabled" | "optional" | "required")
+      def mobile_capture: () -> ("disabled" | "optional" | "required")
+      def address_capture: () -> ("disabled" | "optional" | "required")
+      def merchant_name: () -> String
+      def interest_bearer: () -> ("merchant" | "customer" | nil)
+      def primary_color: () -> String
+      def secondary_color: () -> String
+      def sidebar_color: () -> String
+      def sidebar_background_type: () -> ("color" | "image")
+      def tile_sidebar_image: () -> bool
+      def hide_logo: () -> bool
+      def shop_name_font_family: () -> String
+      def shop_name_font_variant: () -> ("Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black")
+      def heading_font_family: () -> String
+      def heading_font_variant: () -> ("Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black")
+      def body_font_family: () -> String
+      def body_font_variant: () -> ("Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black")
+      def use_iso_code: () -> bool
+      def hide_non_significant_zeros: () -> bool
+      def show_amount_in_button: () -> bool
+      def symbol_placement: () -> ("use_default" | "before_amount" | "after_amount")
+      def default_button_text: () -> String
+      def button_shape: () -> ("rounded_none" | "rounded_full" | "rounded_xs" | "rounded_sm" | "rounded_md" | "rounded_lg" | "rounded_xl")
+      def light_logo_url: () -> (String | nil)
+      def dark_logo_url: () -> (String | nil)
+      def sidebar_image_url: () -> (String | nil)
+    end
+
+    class RetrievePaymentLinkResult
+      def initialize: (untyped raw) -> void
+
+      def description: () -> String
+      def expires_at: () -> (Integer | Float | nil)
+    end
+
+    class RetrievePaymentSessionResult
+      def initialize: (untyped raw) -> void
+
+      def amount: () -> (Integer | Float)
+      def currency: () -> String
+      def payment_method: () -> String
+      def payment_method_display_name: () -> String
+      def card_first_digits: () -> (String | nil)
+      def card_last_digits: () -> (String | nil)
+      def card_network: () -> (String | nil)
+      def installment_term: () -> (Integer | Float | nil)
+      def interest_bearer: () -> ("customer" | "merchant" | nil)
+      def installment_interest_rate: () -> (String | nil)
+      def installment_monthly_amount: () -> (Integer | Float | nil)
+      def installment_total_amount: () -> (Integer | Float | nil)
+      def installment_total_interest_amount: () -> (Integer | Float | nil)
+      def installment_bank_name: () -> (String | nil)
+      def installment_bank_display_name: () -> (String | nil)
+      def payment_authorized_at: () -> (String | nil)
+      def payment_captured_at: () -> (String | nil)
+      def payment_voided_at: () -> (String | nil)
+      def status: () -> ("PENDING" | "INITIATED" | "SUCCESSFUL" | "FAILED" | "EXPIRED")
+      def payment_ref1: () -> (String | nil)
+      def payment_ref2: () -> (String | nil)
+      def payment_ref3: () -> (String | nil)
+      def terminal_id: () -> (String | nil)
+      def expires_at: () -> (Integer | Float | nil)
+    end
+
+    Undefined: untyped
+
+    class Client
+      SOURCE_URL: String
+
+      def initialize: (?untyped real_client, ?bearer_auth: String?, ?version: String?, ?pipelined: bool) -> void
+      def self.from_package_endpoint: (String url, ?bearer_auth: String?, ?version: String?, ?pipelined: bool) -> Client
+
+      def check_status: (merchant_id: String, installation_id: String, payment_session_id: String) -> String
+      def discover_next_action: (merchant_id: String, installation_id: String, payment_session_id: String) -> String
+      def get_redirect_url: (merchant_id: String, installation_id: String, payment_session_id: String) -> String
+      def get_return_url: (merchant_id: String, installation_id: String, payment_session_id: String) -> String
+      def list_installment_plans: (merchant_id: String, installation_id: String, ?bin: String, ?token: String, amount: String, currency: String, ?interest_bearer: "customer" | "merchant") -> Array[InstallmentPlanAttributes]
+      def rehydrate_card: (merchant_id: String, security_code: String, token: String) -> String
+      def retrieve_checkout: (merchant_id: String, installation_id: String, checkout_id: String) -> RetrieveCheckoutResult
+      def retrieve_installation_settings: (merchant_id: String, installation_id: String, ?interest_bearer: "customer" | "merchant") -> RetrieveInstallationSettingsResult
+      def retrieve_payment_link: (merchant_id: String, installation_id: String, payment_link_id: String) -> RetrievePaymentLinkResult
+      def retrieve_payment_session: (payment_session_id: String) -> RetrievePaymentSessionResult
+      def retrieve_qr_data: (merchant_id: String, installation_id: String, payment_session_id: String) -> String
+      def select_payment_method: (merchant_id: String, installation_id: String, ?installment_plan_id: String, amount: String, currency: String, payment_method: String, ?token: String, ?customer_email: String, ?customer_mobile: String, ?customer_name: String, ?customer_language: "en" | "th", ?interest_bearer: "customer" | "merchant", ?street_address_1: String, ?street_address_2: String, ?postal_code: String, ?city: String, ?state: String, ?country: String) -> String
+      def tokenize_card: (merchant_id: String, installation_id: String, number: String, name: String, expiration_date: String, security_code: String, ?usage: "SINGLE" | "MULTIPLE", ?payment_method: "CARD" | "INSTALLMENT" | "CARD_PRESENT", ?street_address_1: String, ?street_address_2: String, ?postal_code: String, ?city: String, ?state: String, ?country: String) -> String
+
+      def call: (String endpoint_name, ?Hash[Symbol, untyped] args) -> untyped
+      def package: () -> untyped
+      def bearer_auth=: (String?) -> void
+      def version=: (String?) -> void
+      def pipeline=: (untyped) -> void
+    end
+  end
+end

@@ -1,0 +1,94 @@
+# Generated client for the Reservepay Terminal API webfunction package.
+# Source: https://api.reservepay.com/terminals
+#
+# Wraps the real web_function gem (github.com/robinclart/web_function) -
+# every method here calls straight through to the real dynamic client.
+module Reservepay
+  module Terminal
+    class ConnectDeviceByCodeResult
+      def initialize: (untyped raw) -> void
+
+      def merchant_id: () -> String
+      def terminal_id: () -> String
+      def key: () -> String
+    end
+
+    class BankAttributes
+      def initialize: (untyped raw) -> void
+
+      def name: () -> String
+      def display_name: () -> String
+    end
+
+    class PaymentMethodAttributes
+      def initialize: (untyped raw) -> void
+
+      def name: () -> String
+      def display_name: () -> String
+      def flow: () -> String
+      def category: () -> String
+      def requires_address: () -> bool
+      def required_fields: () -> Array[String]
+      def banks: () -> Array[BankAttributes]
+    end
+
+    class RetrieveInstallationSettingsResult
+      def initialize: (untyped raw) -> void
+
+      def installation_id: () -> String
+      def name: () -> String
+      def platform: () -> ("WEB" | "IOS" | "ANDROID" | "TERMINAL")
+      def identifier: () -> String
+      def payment_methods: () -> Array[PaymentMethodAttributes]
+      def email_capture: () -> ("disabled" | "optional" | "required")
+      def mobile_capture: () -> ("disabled" | "optional" | "required")
+      def address_capture: () -> ("disabled" | "optional" | "required")
+      def merchant_name: () -> String
+      def interest_bearer: () -> ("merchant" | "customer" | nil)
+      def primary_color: () -> String
+      def secondary_color: () -> String
+      def sidebar_color: () -> String
+      def sidebar_background_type: () -> ("color" | "image")
+      def tile_sidebar_image: () -> bool
+      def hide_logo: () -> bool
+      def shop_name_font_family: () -> String
+      def shop_name_font_variant: () -> ("Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black")
+      def heading_font_family: () -> String
+      def heading_font_variant: () -> ("Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black")
+      def body_font_family: () -> String
+      def body_font_variant: () -> ("Thin" | "ExtraLight" | "Light" | "Regular" | "Medium" | "SemiBold" | "Bold" | "ExtraBold" | "Black")
+      def use_iso_code: () -> bool
+      def hide_non_significant_zeros: () -> bool
+      def show_amount_in_button: () -> bool
+      def symbol_placement: () -> ("use_default" | "before_amount" | "after_amount")
+      def default_button_text: () -> String
+      def button_shape: () -> ("rounded_none" | "rounded_full" | "rounded_xs" | "rounded_sm" | "rounded_md" | "rounded_lg" | "rounded_xl")
+      def light_logo_url: () -> (String | nil)
+      def dark_logo_url: () -> (String | nil)
+      def sidebar_image_url: () -> (String | nil)
+      def terminal_name: () -> String
+      def terminal_branch_name: () -> String
+      def terminal_kiosk_mode: () -> bool
+    end
+
+    Undefined: untyped
+
+    class Client
+      SOURCE_URL: String
+
+      def initialize: (?untyped real_client, ?bearer_auth: String?, ?version: String?, ?pipelined: bool) -> void
+      def self.from_package_endpoint: (String url, ?bearer_auth: String?, ?version: String?, ?pipelined: bool) -> Client
+
+      def connect_device: (merchant_id: String, terminal_id: String, device_id: String, ?challenge: String) -> String
+      def connect_device_by_code: (code: String, device_id: String) -> ConnectDeviceByCodeResult
+      def retrieve_installation_settings: (merchant_id: String, terminal_id: String, device_id: String) -> RetrieveInstallationSettingsResult
+      def verify_connection: (merchant_id: String, terminal_id: String, device_id: String) -> String
+
+      def call: (String endpoint_name, ?Hash[Symbol, untyped] args) -> untyped
+      def package: () -> untyped
+      def bearer_auth=: (String?) -> void
+      def version=: (String?) -> void
+      def pipeline=: (untyped) -> void
+    end
+  end
+end

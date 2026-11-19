@@ -1,0 +1,15 @@
+# Build output
+*.gem
+/pkg/
+
+# Bundler
+.bundle/
+Gemfile.lock
+
+# Editor / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Local scratch
+scratch/
