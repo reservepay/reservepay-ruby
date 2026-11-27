@@ -326,11 +326,12 @@ module Reservepay
 
       def batch_id: () -> String
       def type: () -> ("PAYMENT_LINK" | "PAYOUT")
-      def status: () -> ("CREATED" | "PREPARING" | "PREPARED" | "PROCESSING" | "COMPLETED")
+      def status: () -> ("CREATED" | "PREPARING" | "PREPARED" | "PROCESSING" | "COMPLETED" | "FAILED")
       def output_url: () -> (String | nil)
       def preview_url: () -> (String | nil)
       def error_message: () -> (String | nil)
       def created_at: () -> (Integer | Float)
+      def awaiting_authorization: () -> bool
     end
 
     class FindCardResult
@@ -400,7 +401,9 @@ module Reservepay
       def created_at: () -> (Integer | Float)
       def fees: () -> Array[FeeAttributes]
       def conceded: () -> (true | false)
+      def challenge_fee_waived: () -> (true | false)
       def evidences: () -> Array[DisputeEvidenceAttributes]
+      def entries: () -> Array[EntryAttributes]
     end
 
     class FindInstallationResult
@@ -703,11 +706,12 @@ module Reservepay
 
       def batch_id: () -> String
       def type: () -> ("PAYMENT_LINK" | "PAYOUT")
-      def status: () -> ("CREATED" | "PREPARING" | "PREPARED" | "PROCESSING" | "COMPLETED")
+      def status: () -> ("CREATED" | "PREPARING" | "PREPARED" | "PROCESSING" | "COMPLETED" | "FAILED")
       def output_url: () -> (String | nil)
       def preview_url: () -> (String | nil)
       def error_message: () -> (String | nil)
       def created_at: () -> (Integer | Float)
+      def awaiting_authorization: () -> bool
     end
 
     class CommunicationChannelAttributes
@@ -741,7 +745,9 @@ module Reservepay
       def created_at: () -> (Integer | Float)
       def fees: () -> Array[FeeAttributes]
       def conceded: () -> (true | false)
+      def challenge_fee_waived: () -> (true | false)
       def evidences: () -> Array[DisputeEvidenceAttributes]
+      def entries: () -> Array[EntryAttributes]
     end
 
     class NotificationTopicAttributes
@@ -1351,7 +1357,7 @@ module Reservepay
       def filter_contacts: (?per_page: Integer | Float, ?page: Integer | Float, ?name: String, ?email: String, ?mobile: String, ?terms: String, ?created_at: String) -> TypedPage[ContactAttributes]
       def filter_payment_links: (?per_page: Integer | Float, ?page: Integer | Float, ?terms: String, ?status: "ACTIVE" | "DISABLED" | "EXPIRED" | "PAID", ?usage: "SINGLE" | "MULTIPLE", ?batch_id: String, ?amount: String, ?created_at: String, ?expires_at: String) -> TypedPage[PaymentLinkAttributes]
       def filter_payments: (?per_page: Integer | Float, ?page: Integer | Float, ?status: "PENDING" | "SUCCESSFUL" | "AUTHORIZED" | "VOIDED" | "REVERSED" | "CANCELLED" | "FAILED" | "EXPIRED" | "DISPUTED" | "REFUNDED", ?created_at: String, ?authorized_at: String, ?captured_at: String, ?payment_method: String, ?payment_method_category: String, ?issuer_id: String, ?currency: String, ?amount: String, ?contact_id: String, ?terminal_id: String, ?terms: String, ?fraud_finding: "" | "safe" | "risky") -> TypedPage[PaymentAttributes]
-      def filter_payouts: (?per_page: Integer | Float, ?page: Integer | Float, ?status: "SUCCESSFUL" | "SENT" | "PENDING" | "FAILED" | "CANCELLED" | "REQUESTED", ?created_at: String, ?paid_at: String, ?sent_at: String, ?payout_method: String, ?currency: String, ?amount: String, ?bank_code: String, ?contact_id: String, ?terms: String) -> TypedPage[PayoutAttributes]
+      def filter_payouts: (?per_page: Integer | Float, ?page: Integer | Float, ?status: "SUCCESSFUL" | "SENT" | "PENDING" | "FAILED" | "CANCELLED" | "REQUESTED", ?created_at: String, ?paid_at: String, ?sent_at: String, ?payout_method: String, ?currency: String, ?amount: String, ?bank_code: String, ?contact_id: String, ?batch_id: String, ?terms: String) -> TypedPage[PayoutAttributes]
       def filter_terminals: (?per_page: Integer | Float, ?page: Integer | Float, ?name: String, ?branch_name: String, ?terms: String, ?created_at: String, ?connected_at: String) -> TypedPage[TerminalAttributes]
       def filter_topups: (?per_page: Integer | Float, ?page: Integer | Float, ?type: "MANUAL" | "VIRTUAL_ACCOUNT", ?virtual_account_number: String, ?amount: String, ?created_at: String, ?terms: String) -> TypedPage[TopupAttributes]
       def find_bank_account: (bank_account_id: String) -> FindBankAccountResult

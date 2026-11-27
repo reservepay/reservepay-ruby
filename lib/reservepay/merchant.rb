@@ -797,32 +797,32 @@ module Reservepay
         @raw["payment_method_display_name"]
       end
 
-      # The first 6 digits of the card number. Null for non-card payment methods or card payments without a token.
+      # The first 6 digits of the card number. Includes EDC payments, using the card the partner app reports at capture. Null for non-card payment methods or card payments without card details, such as an EDC payment before capture.
       def card_first_digits
         @raw["card_first_digits"]
       end
 
-      # The last 2 digits of the card number. Null for non-card payment methods or card payments without a token.
+      # The last 2 digits of the card number. Includes EDC payments, using the card the partner app reports at capture. Null for non-card payment methods or card payments without card details, such as an EDC payment before capture.
       def card_last_digits
         @raw["card_last_digits"]
       end
 
-      # The card number with the first 6 and last 2 digits visible and the rest masked. Null for non-card payment methods or card payments without a token.
+      # The card number with the first 6 and last 2 digits visible and the rest masked. Includes EDC payments, using the card the partner app reports at capture. Null for non-card payment methods or card payments without card details, such as an EDC payment before capture.
       def card_masked_number
         @raw["card_masked_number"]
       end
 
-      # The card network, such as visa or mastercard. Null for non-card payment methods or card payments without a token.
+      # The card network, such as visa or mastercard. Includes EDC payments, using the card the partner app reports at capture. Null for non-card payment methods or card payments without card details, such as an EDC payment before capture.
       def card_network
         @raw["card_network"]
       end
 
-      # The cardholder's name as entered on the card. Null for non-card payment methods, card payments without a token, or when no name was entered.
+      # The cardholder's name as entered on the card. Null for non-card payment methods, card payments without card details, or when no name was entered. Always null for EDC payments, as the partner app only reports the card number digits.
       def cardholder_name
         @raw["cardholder_name"]
       end
 
-      # The card's expiration date as captured, usually in MM/YY format. Null for non-card payment methods, card payments without a token, or when no expiration date was captured.
+      # The card's expiration date as captured, usually in MM/YY format. Null for non-card payment methods, card payments without card details, or when no expiration date was captured. Always null for EDC payments, as the partner app only reports the card number digits.
       def card_expiration_date
         @raw["card_expiration_date"]
       end
@@ -1367,6 +1367,11 @@ module Reservepay
         @raw["created_at"]
       end
 
+      # True when any payout in this batch is still in the requested state.
+      def awaiting_authorization
+        @raw["awaiting_authorization"]
+      end
+
     end
 
     class FindCardResult
@@ -1640,9 +1645,19 @@ module Reservepay
         @raw["conceded"]
       end
 
+      # Whether the challenge fee is waived for this dispute.
+      def challenge_fee_waived
+        @raw["challenge_fee_waived"]
+      end
+
       # The evidence submitted for this dispute.
       def evidences
         (@raw["evidences"] || []).map { |item| DisputeEvidenceAttributes.new(item) }
+      end
+
+      # The merchant ledger entries associated with this dispute.
+      def entries
+        (@raw["entries"] || []).map { |item| EntryAttributes.new(item) }
       end
 
     end
@@ -1868,32 +1883,32 @@ module Reservepay
         @raw["payment_method_display_name"]
       end
 
-      # The first 6 digits of the card number. Null for non-card payment methods or card payments without a token.
+      # The first 6 digits of the card number. Includes EDC payments, using the card the partner app reports at capture. Null for non-card payment methods or card payments without card details, such as an EDC payment before capture.
       def card_first_digits
         @raw["card_first_digits"]
       end
 
-      # The last 2 digits of the card number. Null for non-card payment methods or card payments without a token.
+      # The last 2 digits of the card number. Includes EDC payments, using the card the partner app reports at capture. Null for non-card payment methods or card payments without card details, such as an EDC payment before capture.
       def card_last_digits
         @raw["card_last_digits"]
       end
 
-      # The card number with the first 6 and last 2 digits visible and the rest masked. Null for non-card payment methods or card payments without a token.
+      # The card number with the first 6 and last 2 digits visible and the rest masked. Includes EDC payments, using the card the partner app reports at capture. Null for non-card payment methods or card payments without card details, such as an EDC payment before capture.
       def card_masked_number
         @raw["card_masked_number"]
       end
 
-      # The card network, such as visa or mastercard. Null for non-card payment methods or card payments without a token.
+      # The card network, such as visa or mastercard. Includes EDC payments, using the card the partner app reports at capture. Null for non-card payment methods or card payments without card details, such as an EDC payment before capture.
       def card_network
         @raw["card_network"]
       end
 
-      # The cardholder's name as entered on the card. Null for non-card payment methods, card payments without a token, or when no name was entered.
+      # The cardholder's name as entered on the card. Null for non-card payment methods, card payments without card details, or when no name was entered. Always null for EDC payments, as the partner app only reports the card number digits.
       def cardholder_name
         @raw["cardholder_name"]
       end
 
-      # The card's expiration date as captured, usually in MM/YY format. Null for non-card payment methods, card payments without a token, or when no expiration date was captured.
+      # The card's expiration date as captured, usually in MM/YY format. Null for non-card payment methods, card payments without card details, or when no expiration date was captured. Always null for EDC payments, as the partner app only reports the card number digits.
       def card_expiration_date
         @raw["card_expiration_date"]
       end
@@ -2861,6 +2876,11 @@ module Reservepay
         @raw["created_at"]
       end
 
+      # True when any payout in this batch is still in the requested state.
+      def awaiting_authorization
+        @raw["awaiting_authorization"]
+      end
+
     end
 
     class CommunicationChannelAttributes
@@ -2990,9 +3010,19 @@ module Reservepay
         @raw["conceded"]
       end
 
+      # Whether the challenge fee is waived for this dispute.
+      def challenge_fee_waived
+        @raw["challenge_fee_waived"]
+      end
+
       # The evidence submitted for this dispute.
       def evidences
         (@raw["evidences"] || []).map { |item| DisputeEvidenceAttributes.new(item) }
+      end
+
+      # The merchant ledger entries associated with this dispute.
+      def entries
+        (@raw["entries"] || []).map { |item| EntryAttributes.new(item) }
       end
 
     end
@@ -5518,10 +5548,12 @@ module Reservepay
       #
       # Cancels a payment that should not go through. The customer is not charged for a cancelled payment.
       #
-      # Payments in a `PENDING` status, and payments in a `SUCCESSFUL` status that have not been
-      # settled yet, can be cancelled. Once a payment is cancelled, its status changes to `CANCELLED`.
+      # Payments in a `PENDING` status, payments in an `AUTHORIZED` status whose authorization has not
+      # expired yet, and payments in a `SUCCESSFUL` status that have not been settled yet, can be
+      # cancelled. Cancelling an `AUTHORIZED` payment releases the hold on the customer's funds. Once a
+      # payment is cancelled, its status changes to `CANCELLED`.
       # May raise WebFunction::BadRequestError with code NOT_FOUND - This error occurs when no payment with the provided ID exists in your merchant account. Double check that you're using the correct payment ID.
-      # May raise WebFunction::BadRequestError with code NOT_CANCELLABLE - Payment is not eligible for cancellation. This can happen if the payment is not in a `PENDING` or `SUCCESSFUL` status, has already been settled, or its payment method does not support cancellations.
+      # May raise WebFunction::BadRequestError with code NOT_CANCELLABLE - Payment is not eligible for cancellation. This can happen if the payment is not in a `PENDING`, `AUTHORIZED` or `SUCCESSFUL` status, its authorization has expired, it has already been settled, or its payment method does not support cancellations.
       def cancel_payment(payment_id:)
         args = {}
         args[:payment_id] = payment_id
@@ -5829,18 +5861,18 @@ module Reservepay
       #
       # This endpoint provides comprehensive search functionality using the SearchIndex infrastructure,
       # allowing you to filter payouts by various criteria including status, payout method, currency,
-      # amount ranges, and date ranges.
+      # batch, amount ranges, and date ranges.
       #
       # The response includes pagination controls with `previous` and `next` cursors that can be used
       # to navigate through the payout history efficiently.
       #
       # ### Features:
       # - **Full-text search**: Search across payout content
-      # - **Advanced filtering**: Filter by status, payout method, currency, amount, and dates
+      # - **Advanced filtering**: Filter by status, payout method, currency, batch, amount, and dates
       # - **Date range support**: Support for specific dates, datetimes, date ranges, datetime ranges, and keywords
       # - **Pagination**: Efficient cursor-based pagination
       # - **Merchant-scoped**: Only returns payouts for the authenticated merchant
-      def filter_payouts(per_page: Undefined, page: Undefined, status: Undefined, created_at: Undefined, paid_at: Undefined, sent_at: Undefined, payout_method: Undefined, currency: Undefined, amount: Undefined, bank_code: Undefined, contact_id: Undefined, terms: Undefined)
+      def filter_payouts(per_page: Undefined, page: Undefined, status: Undefined, created_at: Undefined, paid_at: Undefined, sent_at: Undefined, payout_method: Undefined, currency: Undefined, amount: Undefined, bank_code: Undefined, contact_id: Undefined, batch_id: Undefined, terms: Undefined)
         args = {}
         args[:per_page] = per_page unless per_page.equal?(Undefined)
         args[:page] = page unless page.equal?(Undefined)
@@ -5853,6 +5885,7 @@ module Reservepay
         args[:amount] = amount unless amount.equal?(Undefined)
         args[:bank_code] = bank_code unless bank_code.equal?(Undefined)
         args[:contact_id] = contact_id unless contact_id.equal?(Undefined)
+        args[:batch_id] = batch_id unless batch_id.equal?(Undefined)
         args[:terms] = terms unless terms.equal?(Undefined)
         TypedPage.new(@real_client.filter_payouts(**args), PayoutAttributes)
       end
@@ -5922,7 +5955,7 @@ module Reservepay
       #
       # Retrieve a batch by ID, including its current status, any prepare or processing error,
       # the preview download URL when prepare has completed, and the result download URL when
-      # processing has completed.
+      # processing has completed. `awaiting_authorization` is true when any payout in the batch is still requested.
       # May raise WebFunction::BadRequestError with code NOT_FOUND - The batch was not found.
       def find_batch(batch_id:)
         args = {}
@@ -6290,6 +6323,8 @@ module Reservepay
       # ## List batches
       #
       # Returns a paginated list of batches for the authenticated merchant, newest first.
+      # A caller only receives batch types their permissions allow.
+      # `awaiting_authorization` is true when any payout in the batch is still requested.
       #
       # Optionally filter by `type` to return only batches of that kind (for example `PAYMENT_LINK`).
       def list_batches(type: Undefined, per_page: Undefined, after: Undefined, before: Undefined)
